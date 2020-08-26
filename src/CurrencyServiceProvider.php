@@ -31,7 +31,7 @@ class CurrencyServiceProvider extends ServiceProvider
         Event::listen("paksuco.menu.beforeRender", function ($key, $container) {
             if ($key == "admin") {
                 if ($container->hasItem("Currencies") == false) {
-                    $container->addItem("Currencies", "#", "fa fa-money");
+                    $container->addItem("Currencies", route("paksuco.currencies.admin"), "fas fa-coins");
                 }
             }
         });
@@ -59,9 +59,9 @@ class CurrencyServiceProvider extends ServiceProvider
 
     private function handleConfigs()
     {
-        $configPath = __DIR__ . '/../config/currency.php';
+        $configPath = __DIR__ . '/../config/currencies.php';
 
-        $this->publishes([$configPath => base_path('config/currency.php')]);
+        $this->publishes([$configPath => base_path('config/currencies.php')]);
 
         $this->mergeConfigFrom($configPath, 'currency');
     }
@@ -77,7 +77,7 @@ class CurrencyServiceProvider extends ServiceProvider
 
         $this->publishes([__DIR__ . '/../views' => base_path('resources/views/paksuco/currency')]);
 
-        Livewire::component("paksuco-currency::currencies", Components\Currency::class);
+        Livewire::component("paksuco-currency::currencies", Components\Currencies::class);
     }
 
     private function handleMigrations()

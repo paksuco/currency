@@ -5,7 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCurrencyTable extends Migration
+class CreateCurrencyTables extends Migration
 {
     /**
      * Run the migrations.
@@ -24,7 +24,7 @@ class CreateCurrencyTable extends Migration
             $table->boolean("space");
             $table->string("symbol", 12);
             $table->integer("decimals");
-            $table->decimal("rate", 4, 12)->default(1);
+            $table->decimal("rate", 12, 4, true)->default(1);
             $table->timestamps();
         });
 
@@ -40,7 +40,7 @@ class CreateCurrencyTable extends Migration
                 "country_name" => $currency->countryName,
                 "currency_code" => $currency->currencyCode,
                 "currency_name" => $currency->currencyName,
-                "direction" => $currency->direction,
+                "direction" => $currency->direction ?? "R",
                 "space" => $currency->space,
                 "symbol" => $currency->symbol,
                 "decimals" => $currency->decimals,

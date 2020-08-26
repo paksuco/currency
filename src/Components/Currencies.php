@@ -4,7 +4,7 @@ namespace Paksuco\Currency\Components;
 
 use Livewire\Component;
 
-class Currency extends Component
+class Currencies extends Component
 {
     public function mount()
     {
@@ -12,6 +12,6 @@ class Currency extends Component
 
     public function render()
     {
-        return view("paksuco-currency::admin.currency");
+        return view("paksuco-currency::admin.currencies");
     }
 }
