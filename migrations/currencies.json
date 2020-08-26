@@ -1,0 +1,1402 @@
+{
+    "AED": {
+        "countryCode": "AE",
+        "countryName": "United Arab Emirates",
+        "currencyCode": "AED",
+        "symbol": ".\u062f.\u0628",
+        "direction": "R",
+        "space": false,
+        "decimals": 2,
+        "currencyName": "Emirati Dirham"
+    },
+    "AFN": {
+        "countryCode": "AF",
+        "countryName": "Afghanistan",
+        "currencyCode": "AFN",
+        "symbol": "\u060b",
+        "direction": "R",
+        "space": false,
+        "decimals": 2,
+        "currencyName": "Afghan Afghani"
+    },
+    "ALL": {
+        "countryCode": "AL",
+        "countryName": "Albania",
+        "currencyCode": "ALL",
+        "symbol": "lek",
+        "direction": "L",
+        "space": false,
+        "decimals": 2,
+        "currencyName": "Albanian lek"
+    },
+    "AMD": {
+        "countryCode": "AM",
+        "countryName": "Armenia",
+        "currencyCode": "AMD",
+        "symbol": "",
+        "direction": null,
+        "space": false,
+        "decimals": 2,
+        "currencyName": "Armenian dram"
+    },
+    "ANG": {
+        "countryCode": "AN",
+        "countryName": "Netherlands Antilles",
+        "currencyCode": "ANG",
+        "symbol": "\u0192",
+        "direction": "L",
+        "space": false,
+        "decimals": 2,
+        "currencyName": "Dutch Guilder"
+    },
+    "AOA": {
+        "countryCode": "AO",
+        "countryName": "Angola",
+        "currencyCode": "AOA",
+        "symbol": "Kz",
+        "direction": "L",
+        "space": false,
+        "decimals": 2,
+        "currencyName": "Angolan Kwanza"
+    },
+    "ARS": {
+        "countryCode": "AR",
+        "countryName": "Argentina",
+        "currencyCode": "ARS",
+        "symbol": "$",
+        "direction": "L",
+        "space": false,
+        "decimals": 2,
+        "currencyName": "Argentine peso"
+    },
+    "AUD": {
+        "countryCode": "AU",
+        "countryName": "Australia",
+        "currencyCode": "AUD",
+        "symbol": "$",
+        "direction": "R",
+        "space": false,
+        "decimals": 2,
+        "currencyName": "Australian Dollar"
+    },
+    "AWG": {
+        "countryCode": "AW",
+        "countryName": "Aruba",
+        "currencyCode": "AWG",
+        "symbol": "\u0192",
+        "direction": "L",
+        "space": false,
+        "decimals": 2,
+        "currencyName": "Arubin florin"
+    },
+    "AZN": {
+        "countryCode": "AZ",
+        "countryName": "Azerbaijan",
+        "currencyCode": "AZN",
+        "symbol": "\u043c\u0430\u043d",
+        "direction": "L",
+        "space": false,
+        "decimals": 2,
+        "currencyName": "Azerbaijani manat"
+    },
+    "BAM": {
+        "countryCode": "BA",
+        "countryName": "Bosnia and Herzegovina",
+        "currencyCode": "BAM",
+        "symbol": "KM",
+        "direction": "L",
+        "space": false,
+        "decimals": 2,
+        "currencyName": "Bosnian Convertible Marka"
+    },
+    "BBD": {
+        "countryCode": "BB",
+        "countryName": "Barbados",
+        "currencyCode": "BBD",
+        "symbol": "$",
+        "direction": "L",
+        "space": false,
+        "decimals": 2,
+        "currencyName": "Barbadian dollar"
+    },
+    "BDT": {
+        "countryCode": "BD",
+        "countryName": "Bangladesh",
+        "currencyCode": "BDT",
+        "symbol": "Tk",
+        "direction": "L",
+        "space": false,
+        "decimals": 2,
+        "currencyName": "Bangladeshi Taka"
+    },
+    "BGN": {
+        "countryCode": "BG",
+        "countryName": "Bulgaria",
+        "currencyCode": "BGN",
+        "symbol": "\u043b\u0432",
+        "direction": "L",
+        "space": false,
+        "decimals": 2,
+        "currencyName": "Bulgarian lev"
+    },
+    "BHD": {
+        "countryCode": "BH",
+        "countryName": "Bahrain",
+        "currencyCode": "BHD",
+        "symbol": ".\u062f.\u0628 or BD",
+        "direction": "L",
+        "space": false,
+        "decimals": 3,
+        "currencyName": "Bahraini Dinar"
+    },
+    "BIF": {
+        "countryCode": "BI",
+        "countryName": "Burundi",
+        "currencyCode": "BIF",
+        "symbol": "",
+        "direction": null,
+        "space": false,
+        "decimals": 2,
+        "currencyName": "Burundian Franc"
+    },
+    "BMD": {
+        "countryCode": "BM",
+        "countryName": "Bermuda",
+        "currencyCode": "BMD",
+        "symbol": "$",
+        "direction": "L",
+        "space": false,
+        "decimals": 2,
+        "currencyName": "Bermudian dollar"
+    },
+    "BND": {
+        "countryCode": "BN",
+        "countryName": "Brunei",
+        "currencyCode": "BND",
+        "symbol": "$",
+        "direction": "L",
+        "space": false,
+        "decimals": 2,
+        "currencyName": "Bruneian Dollar"
+    },
+    "BOB": {
+        "countryCode": "BO",
+        "countryName": "Bolivia",
+        "currencyCode": "BOB",
+        "symbol": "$b",
+        "direction": "L",
+        "space": false,
+        "decimals": 2,
+        "currencyName": "Bolivian Boliviano"
+    },
+    "BRL": {
+        "countryCode": "BR",
+        "countryName": "Brazil",
+        "currencyCode": "BRL",
+        "symbol": "R$",
+        "direction": "L",
+        "space": false,
+        "decimals": 2,
+        "currencyName": "Brazilian real"
+    },
+    "BSD": {
+        "countryCode": "BS",
+        "countryName": "The Bahamas",
+        "currencyCode": "BSD",
+        "symbol": "B$",
+        "direction": "L",
+        "space": false,
+        "decimals": 2,
+        "currencyName": "Bahamian dollar"
+    },
+    "BTN": {
+        "countryCode": "BT",
+        "countryName": "Bhutan",
+        "currencyCode": "BTN",
+        "symbol": "Nu.",
+        "direction": "L",
+        "space": false,
+        "decimals": 2,
+        "currencyName": "Bhutanese Ngultrum"
+    },
+    "BWP": {
+        "countryCode": "BW",
+        "countryName": "Botswana",
+        "currencyCode": "BWP",
+        "symbol": "P",
+        "direction": "L",
+        "space": false,
+        "decimals": 2,
+        "currencyName": "Botswana Pula"
+    },
+    "BYR": {
+        "countryCode": "BY",
+        "countryName": "Belarus",
+        "currencyCode": "BYR",
+        "symbol": "\u0440",
+        "direction": "L",
+        "space": false,
+        "decimals": 2,
+        "currencyName": "Belarusian ruble"
+    },
+    "BZD": {
+        "countryCode": "BZ",
+        "countryName": "Belize",
+        "currencyCode": "BZD",
+        "symbol": "BZ$",
+        "direction": "L",
+        "space": false,
+        "decimals": 2,
+        "currencyName": "Belize dollar"
+    },
+    "CAD": {
+        "countryCode": "CA",
+        "countryName": "Canada",
+        "currencyCode": "CAD",
+        "symbol": "$",
+        "direction": "R",
+        "space": false,
+        "decimals": 2,
+        "currencyName": "Canadian Dollar"
+    },
+    "CHF": {
+        "countryCode": "CH",
+        "countryName": "Switzerland",
+        "currencyCode": "CHF",
+        "symbol": "CHF",
+        "direction": "L",
+        "space": false,
+        "decimals": 2,
+        "currencyName": "Swiss Franc"
+    },
+    "CLP": {
+        "countryCode": "CL",
+        "countryName": "Chile",
+        "currencyCode": "CLP",
+        "symbol": "$",
+        "direction": "L",
+        "space": false,
+        "decimals": 2,
+        "currencyName": "Chilean Peso"
+    },
+    "CNY": {
+        "countryCode": "CN",
+        "countryName": "People's Republic of China",
+        "currencyCode": "CNY",
+        "symbol": "\u00a5",
+        "direction": "L",
+        "space": false,
+        "decimals": 2,
+        "currencyName": "Yuan or chinese renminbi"
+    },
+    "COP": {
+        "countryCode": "CO",
+        "countryName": "Colombia",
+        "currencyCode": "COP",
+        "symbol": "$",
+        "direction": "L",
+        "space": false,
+        "decimals": 2,
+        "currencyName": "Colombian peso"
+    },
+    "CRC": {
+        "countryCode": "CR",
+        "countryName": "Costa Rica",
+        "currencyCode": "CRC",
+        "symbol": "\u20a1",
+        "direction": "L",
+        "space": false,
+        "decimals": 2,
+        "currencyName": "Costa Rican col\u00f3n"
+    },
+    "CUP": {
+        "countryCode": "CU",
+        "countryName": "Cuba",
+        "currencyCode": "CUP",
+        "symbol": "\u20b1",
+        "direction": "L",
+        "space": false,
+        "decimals": 2,
+        "currencyName": "Cuban peso"
+    },
+    "CVE": {
+        "countryCode": "CV",
+        "countryName": "Cape Verde",
+        "currencyCode": "CVE",
+        "symbol": "$",
+        "direction": "L",
+        "space": false,
+        "decimals": 2,
+        "currencyName": "Cape Verdean Escudo"
+    },
+    "CZK": {
+        "countryCode": "CZ",
+        "countryName": "Czech Republic",
+        "currencyCode": "CZK",
+        "symbol": "K\u010d",
+        "direction": "R",
+        "space": false,
+        "decimals": 2,
+        "currencyName": "Czech koruna"
+    },
+    "DJF": {
+        "countryCode": "DJ",
+        "countryName": "Djibouti",
+        "currencyCode": "DJF",
+        "symbol": "fdj",
+        "direction": "R",
+        "space": false,
+        "decimals": 2,
+        "currencyName": "Djiboutian Franc"
+    },
+    "DKK": {
+        "countryCode": "DK",
+        "countryName": "Denmark",
+        "currencyCode": "DKK",
+        "symbol": "kr",
+        "direction": "L",
+        "space": false,
+        "decimals": 2,
+        "currencyName": "Danish krone"
+    },
+    "DOP": {
+        "countryCode": "DO",
+        "countryName": "Dominican Republic",
+        "currencyCode": "DOP",
+        "symbol": "$",
+        "direction": "L",
+        "space": false,
+        "decimals": 2,
+        "currencyName": "Dominican peso"
+    },
+    "DZD": {
+        "countryCode": "DZ",
+        "countryName": "Algeria",
+        "currencyCode": "DZD",
+        "symbol": "\u062c\u062f",
+        "direction": "L",
+        "space": false,
+        "decimals": 2,
+        "currencyName": "Algerian Dinar"
+    },
+    "EGP": {
+        "countryCode": "EG",
+        "countryName": "Egypt",
+        "currencyCode": "EGP",
+        "symbol": "\u00a3 ",
+        "direction": "L",
+        "space": false,
+        "decimals": 2,
+        "currencyName": "Egyptian Pound"
+    },
+    "ERN": {
+        "countryCode": "ER",
+        "countryName": "Eritrea",
+        "currencyCode": "ERN",
+        "symbol": "\u1293\u1255\u134b",
+        "direction": "R",
+        "space": false,
+        "decimals": 2,
+        "currencyName": "Eritrean nakfa"
+    },
+    "ETB": {
+        "countryCode": "ET",
+        "countryName": "Ethiopia",
+        "currencyCode": "ETB",
+        "symbol": "Br",
+        "direction": "L",
+        "space": false,
+        "decimals": 2,
+        "currencyName": "Ethiopian Birr"
+    },
+    "EUR": {
+        "countryCode": "EU",
+        "countryName": "European Union",
+        "currencyCode": "EUR",
+        "symbol": "\u20ac",
+        "direction": "L",
+        "space": false,
+        "decimals": 2,
+        "currencyName": "Euro"
+    },
+    "FJD": {
+        "countryCode": "FJ",
+        "countryName": "Fiji",
+        "currencyCode": "FJD",
+        "symbol": "$",
+        "direction": "L",
+        "space": false,
+        "decimals": 2,
+        "currencyName": "Fijian dollar"
+    },
+    "FKP": {
+        "countryCode": "FK",
+        "countryName": "Falkland Islands",
+        "currencyCode": "FKP",
+        "symbol": "\u00a3",
+        "direction": "L",
+        "space": false,
+        "decimals": 2,
+        "currencyName": "Falkland Island Pound"
+    },
+    "GBP": {
+        "countryCode": "GB",
+        "countryName": "United Kingdom",
+        "currencyCode": "GBP",
+        "symbol": "\u00a3",
+        "direction": "L",
+        "space": false,
+        "decimals": 2,
+        "currencyName": "British Pound"
+    },
+    "GEL": {
+        "countryCode": "GE",
+        "countryName": "Georgia",
+        "currencyCode": "GEL",
+        "symbol": "\u10da",
+        "direction": "L",
+        "space": false,
+        "decimals": 2,
+        "currencyName": "Georgian lari"
+    },
+    "GIP": {
+        "countryCode": "GI",
+        "countryName": "Gibraltar",
+        "currencyCode": "GIP",
+        "symbol": "\u00a3",
+        "direction": "L",
+        "space": false,
+        "decimals": 2,
+        "currencyName": "Gibraltar pound"
+    },
+    "GMD": {
+        "countryCode": "GM",
+        "countryName": "The Gambia",
+        "currencyCode": "GMD",
+        "symbol": "",
+        "direction": null,
+        "space": true,
+        "decimals": 2,
+        "currencyName": "Gambian dalasi"
+    },
+    "GNF": {
+        "countryCode": "GN",
+        "countryName": "Guinea",
+        "currencyCode": "GNF",
+        "symbol": "",
+        "direction": null,
+        "space": false,
+        "decimals": 2,
+        "currencyName": "Guinean Franc"
+    },
+    "GTQ": {
+        "countryCode": "GT",
+        "countryName": "Guatemala",
+        "currencyCode": "GTQ",
+        "symbol": "Q",
+        "direction": "L",
+        "space": false,
+        "decimals": 2,
+        "currencyName": "Guatemalan Quetzal"
+    },
+    "GYD": {
+        "countryCode": "GY",
+        "countryName": "Guyana",
+        "currencyCode": "GYD",
+        "symbol": "$",
+        "direction": "L",
+        "space": false,
+        "decimals": 2,
+        "currencyName": "Guyanese dollar"
+    },
+    "HKD": {
+        "countryCode": "HK",
+        "countryName": "Hong Kong",
+        "currencyCode": "HKD",
+        "symbol": "HK$",
+        "direction": "L",
+        "space": false,
+        "decimals": 2,
+        "currencyName": "Hong Kong dollar"
+    },
+    "HNL": {
+        "countryCode": "HN",
+        "countryName": "Honduras",
+        "currencyCode": "HNL",
+        "symbol": "L",
+        "direction": "L",
+        "space": false,
+        "decimals": 2,
+        "currencyName": "Honduran lempira"
+    },
+    "HRK": {
+        "countryCode": "HR",
+        "countryName": "Croatia",
+        "currencyCode": "HRK",
+        "symbol": "kn",
+        "direction": "L",
+        "space": false,
+        "decimals": 2,
+        "currencyName": "Croatian kuna"
+    },
+    "HTG": {
+        "countryCode": "HT",
+        "countryName": "Haiti",
+        "currencyCode": "HTG",
+        "symbol": "G",
+        "direction": "L",
+        "space": false,
+        "decimals": 2,
+        "currencyName": "Haitian gourde"
+    },
+    "HUF": {
+        "countryCode": "HU",
+        "countryName": "Hungary",
+        "currencyCode": "HUF",
+        "symbol": "Ft",
+        "direction": "L",
+        "space": false,
+        "decimals": 2,
+        "currencyName": "Hungarian forint"
+    },
+    "IDR": {
+        "countryCode": "ID",
+        "countryName": "Indonesia",
+        "currencyCode": "IDR",
+        "symbol": "Rp",
+        "direction": "L",
+        "space": false,
+        "decimals": 2,
+        "currencyName": "Indonesian Rupiah"
+    },
+    "ILS": {
+        "countryCode": "IL",
+        "countryName": "Israel",
+        "currencyCode": "ILS",
+        "symbol": "\u20aa",
+        "direction": "R",
+        "space": false,
+        "decimals": 2,
+        "currencyName": "Israeli Shekel"
+    },
+    "INR": {
+        "countryCode": "IN",
+        "countryName": "India",
+        "currencyCode": "INR",
+        "symbol": "\u20b9",
+        "direction": "L",
+        "space": false,
+        "decimals": 2,
+        "currencyName": "Indian Rupee"
+    },
+    "IQD": {
+        "countryCode": "IQ",
+        "countryName": "Iraq",
+        "currencyCode": "IQD",
+        "symbol": "\u0639.\u062f",
+        "direction": "R",
+        "space": false,
+        "decimals": 3,
+        "currencyName": "Iraqi Dinar"
+    },
+    "IRR": {
+        "countryCode": "IR",
+        "countryName": "Iran",
+        "currencyCode": "IRR",
+        "symbol": "",
+        "direction": null,
+        "space": false,
+        "decimals": 2,
+        "currencyName": "Iranian Rial"
+    },
+    "ISK": {
+        "countryCode": "IS",
+        "countryName": "Iceland",
+        "currencyCode": "ISK",
+        "symbol": "kr",
+        "direction": "L",
+        "space": false,
+        "decimals": 2,
+        "currencyName": "Icelandic Krona"
+    },
+    "JMD": {
+        "countryCode": "JM",
+        "countryName": "Jamaica",
+        "currencyCode": "JMD",
+        "symbol": "J$",
+        "direction": "L",
+        "space": false,
+        "decimals": 2,
+        "currencyName": "Jamaican dollar"
+    },
+    "JOD": {
+        "countryCode": "JO",
+        "countryName": "Jordan",
+        "currencyCode": "JOD",
+        "symbol": "",
+        "direction": null,
+        "space": true,
+        "decimals": 2,
+        "currencyName": "Jordanian Dinar"
+    },
+    "JPY": {
+        "countryCode": "JP",
+        "countryName": "Japan",
+        "currencyCode": "JPY",
+        "symbol": "\u00a5",
+        "direction": "L",
+        "space": false,
+        "decimals": 2,
+        "currencyName": "Japanese yen"
+    },
+    "KES": {
+        "countryCode": "KE",
+        "countryName": "Kenya",
+        "currencyCode": "KES",
+        "symbol": "KSh",
+        "direction": "L",
+        "space": false,
+        "decimals": 2,
+        "currencyName": "Kenyan Shilling"
+    },
+    "KGS": {
+        "countryCode": "KG",
+        "countryName": "Kyrgyzstan",
+        "currencyCode": "KGS",
+        "symbol": "\u043b\u0432",
+        "direction": "L",
+        "space": false,
+        "decimals": 2,
+        "currencyName": "Kyrgyzstani som"
+    },
+    "KHR": {
+        "countryCode": "KH",
+        "countryName": "Cambodia",
+        "currencyCode": "KHR",
+        "symbol": "\u17db",
+        "direction": "L",
+        "space": false,
+        "decimals": 1,
+        "currencyName": "Cambodian Riel"
+    },
+    "KMF": {
+        "countryCode": "KM",
+        "countryName": "Comoros",
+        "currencyCode": "KMF",
+        "symbol": "",
+        "direction": null,
+        "space": false,
+        "decimals": 2,
+        "currencyName": "Comoran Franc"
+    },
+    "KPW": {
+        "countryCode": "KP",
+        "countryName": "North Korea",
+        "currencyCode": "KPW",
+        "symbol": "\u20a9",
+        "direction": "L",
+        "space": false,
+        "decimals": 2,
+        "currencyName": "North Korean won"
+    },
+    "KRW": {
+        "countryCode": "KR",
+        "countryName": "South Korea",
+        "currencyCode": "KRW",
+        "symbol": "\u20a9",
+        "direction": "L",
+        "space": false,
+        "decimals": 2,
+        "currencyName": "South Korean won"
+    },
+    "KWD": {
+        "countryCode": "KW",
+        "countryName": "Kuwait",
+        "currencyCode": "KWD",
+        "symbol": "\u0643",
+        "direction": "L",
+        "space": false,
+        "decimals": 3,
+        "currencyName": "Kuwaiti Dinar"
+    },
+    "KYD": {
+        "countryCode": "KY",
+        "countryName": "Cayman Islands",
+        "currencyCode": "KYD",
+        "symbol": "$",
+        "direction": "L",
+        "space": false,
+        "decimals": 2,
+        "currencyName": "Caymanian Dollar"
+    },
+    "KZT": {
+        "countryCode": "KZ",
+        "countryName": "Kazakhstan",
+        "currencyCode": "KZT",
+        "symbol": "\u20b8",
+        "direction": "L",
+        "space": false,
+        "decimals": 2,
+        "currencyName": "Kazakhstani tenge"
+    },
+    "LAK": {
+        "countryCode": "LA",
+        "countryName": "Laos",
+        "currencyCode": "LAK",
+        "symbol": "\u20ad",
+        "direction": "L",
+        "space": false,
+        "decimals": 2,
+        "currencyName": "Lao or Laotian Kip"
+    },
+    "LBP": {
+        "countryCode": "LB",
+        "countryName": "Lebanon",
+        "currencyCode": "LBP",
+        "symbol": "\u0644.\u0644",
+        "direction": "R",
+        "space": false,
+        "decimals": 2,
+        "currencyName": "Lebanese Pound"
+    },
+    "LKR": {
+        "countryCode": "LK",
+        "countryName": "Sri Lanka",
+        "currencyCode": "LKR",
+        "symbol": "Rs",
+        "direction": "L",
+        "space": false,
+        "decimals": 2,
+        "currencyName": "Sri Lankan Rupee"
+    },
+    "LRD": {
+        "countryCode": "LR",
+        "countryName": "Liberia",
+        "currencyCode": "LRD",
+        "symbol": "$",
+        "direction": "L",
+        "space": false,
+        "decimals": 2,
+        "currencyName": "Liberian Dollar"
+    },
+    "LSL": {
+        "countryCode": "LS",
+        "countryName": "Lesotho",
+        "currencyCode": "LSL",
+        "symbol": "L or M",
+        "direction": "L",
+        "space": false,
+        "decimals": 2,
+        "currencyName": "Lesotho loti"
+    },
+    "LTL": {
+        "countryCode": "LT",
+        "countryName": "Lithuania",
+        "currencyCode": "LTL",
+        "symbol": "Lt",
+        "direction": "L",
+        "space": false,
+        "decimals": 2,
+        "currencyName": "Lithuanian litas"
+    },
+    "LYD": {
+        "countryCode": "LY",
+        "countryName": "Libya",
+        "currencyCode": "LYD",
+        "symbol": " \u062f.\u0644",
+        "direction": "L",
+        "space": true,
+        "decimals": 2,
+        "currencyName": "Libyan Dinar"
+    },
+    "MAD": {
+        "countryCode": "MA",
+        "countryName": "Morocco",
+        "currencyCode": "MAD",
+        "symbol": "\u0645.\u062f.",
+        "direction": "L",
+        "space": true,
+        "decimals": 2,
+        "currencyName": "Moroccan Dirham"
+    },
+    "MDL": {
+        "countryCode": "MD",
+        "countryName": "Moldova",
+        "currencyCode": "MDL",
+        "symbol": "L",
+        "direction": "L",
+        "space": false,
+        "decimals": 2,
+        "currencyName": "Moldovan Leu"
+    },
+    "MGA": {
+        "countryCode": "MG",
+        "countryName": "Madagascar",
+        "currencyCode": "MGA",
+        "symbol": "Ar",
+        "direction": "L",
+        "space": false,
+        "decimals": 1,
+        "currencyName": "Malagasy Ariary"
+    },
+    "MKD": {
+        "countryCode": "MK",
+        "countryName": "Macedonia",
+        "currencyCode": "MKD",
+        "symbol": "\u0434\u0435\u043d",
+        "direction": "L",
+        "space": false,
+        "decimals": 2,
+        "currencyName": "Macedonian Denar"
+    },
+    "MMK": {
+        "countryCode": "MM",
+        "countryName": "Myanmar (Burma)",
+        "currencyCode": "MMK",
+        "symbol": "K",
+        "direction": "L",
+        "space": false,
+        "decimals": 2,
+        "currencyName": "Burmese Kyat"
+    },
+    "MNT": {
+        "countryCode": "MN",
+        "countryName": "Mongolia",
+        "currencyCode": "MNT",
+        "symbol": "\u20ae",
+        "direction": "L",
+        "space": false,
+        "decimals": 2,
+        "currencyName": "Mongolian Tughrik"
+    },
+    "MOP": {
+        "countryCode": "MO",
+        "countryName": "Macau",
+        "currencyCode": "MOP",
+        "symbol": "MOP$",
+        "direction": "L",
+        "space": false,
+        "decimals": 1,
+        "currencyName": "Macau Pataca"
+    },
+    "MRO": {
+        "countryCode": "MR",
+        "countryName": "Mauritania",
+        "currencyCode": "MRO",
+        "symbol": "UM",
+        "direction": "L",
+        "space": false,
+        "decimals": 2,
+        "currencyName": "Mauritanian Ouguiya"
+    },
+    "MUR": {
+        "countryCode": "MU",
+        "countryName": "Mauritius",
+        "currencyCode": "MUR",
+        "symbol": "Rs",
+        "direction": "L",
+        "space": false,
+        "decimals": 2,
+        "currencyName": "Mauritian rupee"
+    },
+    "MWK": {
+        "countryCode": "MW",
+        "countryName": "Malawi",
+        "currencyCode": "MWK",
+        "symbol": "MK",
+        "direction": "L",
+        "space": false,
+        "decimals": 2,
+        "currencyName": "Malawian Kwacha"
+    },
+    "MXN": {
+        "countryCode": "MX",
+        "countryName": "Mexico",
+        "currencyCode": "MXN",
+        "symbol": "$",
+        "direction": "L",
+        "space": false,
+        "decimals": 2,
+        "currencyName": "Mexico Peso"
+    },
+    "MYR": {
+        "countryCode": "MY",
+        "countryName": "Malaysia",
+        "currencyCode": "MYR",
+        "symbol": "RM",
+        "direction": "L",
+        "space": false,
+        "decimals": 2,
+        "currencyName": "Malaysian Ringgit"
+    },
+    "NAD": {
+        "countryCode": "NA",
+        "countryName": "Namibia",
+        "currencyCode": "NAD",
+        "symbol": "$",
+        "direction": "L",
+        "space": false,
+        "decimals": 2,
+        "currencyName": "Namibian Dollar"
+    },
+    "NGN": {
+        "countryCode": "NG",
+        "countryName": "Nigeria",
+        "currencyCode": "NGN",
+        "symbol": "\u20a6",
+        "direction": "L",
+        "space": false,
+        "decimals": 2,
+        "currencyName": "Nigerian Naira"
+    },
+    "NIO": {
+        "countryCode": "NI",
+        "countryName": "Nicaragua",
+        "currencyCode": "NIO",
+        "symbol": "C$",
+        "direction": "L",
+        "space": false,
+        "decimals": 2,
+        "currencyName": "Nicaraguan c\u00f3rdoba"
+    },
+    "NOK": {
+        "countryCode": "NO",
+        "countryName": "Norway",
+        "currencyCode": "NOK",
+        "symbol": "kr",
+        "direction": "L",
+        "space": false,
+        "decimals": 2,
+        "currencyName": "Norwegian krone"
+    },
+    "NPR": {
+        "countryCode": "NP",
+        "countryName": "Nepal",
+        "currencyCode": "NPR",
+        "symbol": "Rs",
+        "direction": "L",
+        "space": false,
+        "decimals": 2,
+        "currencyName": "Nepalese Rupee"
+    },
+    "NZD": {
+        "countryCode": "CK",
+        "countryName": "Cook Islands",
+        "currencyCode": "NZD",
+        "symbol": "$",
+        "direction": "L",
+        "space": false,
+        "decimals": 2,
+        "currencyName": "New Zealand Dollar"
+    },
+    "OMR": {
+        "countryCode": "OM",
+        "countryName": "Oman",
+        "currencyCode": "OMR",
+        "symbol": "\u0639.\u0631.",
+        "direction": "L",
+        "space": false,
+        "decimals": 3,
+        "currencyName": "Omani Rial"
+    },
+    "PAB": {
+        "countryCode": "PA",
+        "countryName": "Panama",
+        "currencyCode": "PAB",
+        "symbol": "B\/",
+        "direction": "L",
+        "space": false,
+        "decimals": 2,
+        "currencyName": "Balboa panam\u00e9rn"
+    },
+    "PEN": {
+        "countryCode": "PE",
+        "countryName": "Peru",
+        "currencyCode": "PEN",
+        "symbol": "S\/",
+        "direction": "L",
+        "space": false,
+        "decimals": 2,
+        "currencyName": "Peruvian nuevo sol"
+    },
+    "PGK": {
+        "countryCode": "PG",
+        "countryName": "Papua New Guinea",
+        "currencyCode": "PGK",
+        "symbol": "K",
+        "direction": "L",
+        "space": false,
+        "decimals": 2,
+        "currencyName": "Papua New Guinean Kina"
+    },
+    "PHP": {
+        "countryCode": "PH",
+        "countryName": "Philippines",
+        "currencyCode": "PHP",
+        "symbol": "\u20b1",
+        "direction": "L",
+        "space": false,
+        "decimals": 2,
+        "currencyName": "Philippine Peso"
+    },
+    "PKR": {
+        "countryCode": "PK",
+        "countryName": "Pakistan",
+        "currencyCode": "PKR",
+        "symbol": "Rs",
+        "direction": "L",
+        "space": false,
+        "decimals": 2,
+        "currencyName": "Pakistani Rupee"
+    },
+    "PLN": {
+        "countryCode": "PL",
+        "countryName": "Poland",
+        "currencyCode": "PLN",
+        "symbol": "z\u0142",
+        "direction": "L",
+        "space": false,
+        "decimals": 2,
+        "currencyName": "Polish z\u0142oty"
+    },
+    "PYG": {
+        "countryCode": "PY",
+        "countryName": "Paraguay",
+        "currencyCode": "PYG",
+        "symbol": "\u20b2",
+        "direction": "L",
+        "space": false,
+        "decimals": 2,
+        "currencyName": "Paraguayan guarani"
+    },
+    "QAR": {
+        "countryCode": "QA",
+        "countryName": "Qatar",
+        "currencyCode": "QAR",
+        "symbol": "\u0642.\u0631 ",
+        "direction": "L",
+        "space": false,
+        "decimals": 2,
+        "currencyName": "Qatari Riyal"
+    },
+    "RON": {
+        "countryCode": "RO",
+        "countryName": "Romania",
+        "currencyCode": "RON",
+        "symbol": "lei",
+        "direction": "L",
+        "space": false,
+        "decimals": 2,
+        "currencyName": "Romanian leu"
+    },
+    "RSD": {
+        "countryCode": "RS",
+        "countryName": "Serbia",
+        "currencyCode": "RSD",
+        "symbol": "\u0420\u0421\u0414",
+        "direction": "L",
+        "space": false,
+        "decimals": 2,
+        "currencyName": "Serbian Dinar"
+    },
+    "RUB": {
+        "countryCode": "RU",
+        "countryName": "Russia",
+        "currencyCode": "RUB",
+        "symbol": "\u20bd",
+        "direction": "L",
+        "space": false,
+        "decimals": 2,
+        "currencyName": "Russian Rouble"
+    },
+    "RWF": {
+        "countryCode": "RW",
+        "countryName": "Rwanda",
+        "currencyCode": "RWF",
+        "symbol": "FRw, RF, R\u20a3",
+        "direction": "L",
+        "space": false,
+        "decimals": 2,
+        "currencyName": "Rwandan franc"
+    },
+    "SAR": {
+        "countryCode": "SA",
+        "countryName": "Saudi Arabia",
+        "currencyCode": "SAR",
+        "symbol": "\u0631.\u0633",
+        "direction": "R",
+        "space": false,
+        "decimals": 2,
+        "currencyName": "Saudi Arabian Riyal"
+    },
+    "SBD": {
+        "countryCode": "SB",
+        "countryName": "Solomon Islands",
+        "currencyCode": "SBD",
+        "symbol": "SI$",
+        "direction": "L",
+        "space": false,
+        "decimals": 2,
+        "currencyName": "Solomon Islander Dollar"
+    },
+    "SCR": {
+        "countryCode": "SC",
+        "countryName": "Seychelles",
+        "currencyCode": "SCR",
+        "symbol": "Rs",
+        "direction": "L",
+        "space": false,
+        "decimals": 2,
+        "currencyName": "Seychellois Rupee"
+    },
+    "SEK": {
+        "countryCode": "SE",
+        "countryName": "Sweden",
+        "currencyCode": "SEK",
+        "symbol": "kr",
+        "direction": "L",
+        "space": false,
+        "decimals": 2,
+        "currencyName": "Swedish krona"
+    },
+    "SGD": {
+        "countryCode": "SG",
+        "countryName": "Singapore",
+        "currencyCode": "SGD",
+        "symbol": "$",
+        "direction": "L",
+        "space": false,
+        "decimals": 2,
+        "currencyName": "Singapore Dollar"
+    },
+    "SLL": {
+        "countryCode": "SL",
+        "countryName": "Sierra Leone",
+        "currencyCode": "SLL",
+        "symbol": "Le",
+        "direction": "L",
+        "space": false,
+        "decimals": 2,
+        "currencyName": "Sierra Leonean Leone"
+    },
+    "SOS": {
+        "countryCode": "SO",
+        "countryName": "Somalia",
+        "currencyCode": "SOS",
+        "symbol": "S",
+        "direction": "L",
+        "space": false,
+        "decimals": 2,
+        "currencyName": "Somali Shilling"
+    },
+    "SRD": {
+        "countryCode": "SR",
+        "countryName": "Suriname",
+        "currencyCode": "SRD",
+        "symbol": "$",
+        "direction": "L",
+        "space": false,
+        "decimals": 2,
+        "currencyName": "Surinamese dollar"
+    },
+    "SYP": {
+        "countryCode": "SY",
+        "countryName": "Syria",
+        "currencyCode": "SYP",
+        "symbol": "\u00a3",
+        "direction": "L",
+        "space": false,
+        "decimals": 2,
+        "currencyName": "Syrian Pound"
+    },
+    "SZL": {
+        "countryCode": "SZ",
+        "countryName": "Swaziland",
+        "currencyCode": "SZL",
+        "symbol": "L or E",
+        "direction": "L",
+        "space": false,
+        "decimals": 2,
+        "currencyName": "Swazi Lilangeni"
+    },
+    "THB": {
+        "countryCode": "TH",
+        "countryName": "Thailand",
+        "currencyCode": "THB",
+        "symbol": "\u0e3f",
+        "direction": "L",
+        "space": false,
+        "decimals": 2,
+        "currencyName": "Thai Baht"
+    },
+    "TJS": {
+        "countryCode": "TJ",
+        "countryName": "Tajikistan",
+        "currencyCode": "TJS",
+        "symbol": "",
+        "direction": null,
+        "space": false,
+        "decimals": 2,
+        "currencyName": "Tajikistani somoni"
+    },
+    "TND": {
+        "countryCode": "TN",
+        "countryName": "Tunisia",
+        "currencyCode": "TND",
+        "symbol": "",
+        "direction": null,
+        "space": false,
+        "decimals": 3,
+        "currencyName": "Tunisian Dinar"
+    },
+    "TOP": {
+        "countryCode": "TO",
+        "countryName": "Tonga",
+        "currencyCode": "TOP",
+        "symbol": "T$",
+        "direction": "L",
+        "space": false,
+        "decimals": 2,
+        "currencyName": "Tongan Pa'anga"
+    },
+    "TRY": {
+        "countryCode": "TR",
+        "countryName": "Turkey",
+        "currencyCode": "TRY",
+        "symbol": "&#8378;",
+        "direction": "L",
+        "space": false,
+        "decimals": 2,
+        "currencyName": "Turkish Lira"
+    },
+    "TTD": {
+        "countryCode": "TT",
+        "countryName": "Trinidad and Tobago",
+        "currencyCode": "TTD",
+        "symbol": "TT$",
+        "direction": "L",
+        "space": false,
+        "decimals": 2,
+        "currencyName": "Trinidadian dollar"
+    },
+    "TWD": {
+        "countryCode": "TW",
+        "countryName": "Taiwan",
+        "currencyCode": "TWD",
+        "symbol": "NT$",
+        "direction": "L",
+        "space": false,
+        "decimals": 1,
+        "currencyName": "Taiwan New Dollar"
+    },
+    "TZS": {
+        "countryCode": "TZ",
+        "countryName": "Tanzania",
+        "currencyCode": "TZS",
+        "symbol": "Sh",
+        "direction": "L",
+        "space": false,
+        "decimals": 2,
+        "currencyName": "Tanzanian Shilling"
+    },
+    "UAH": {
+        "countryCode": "UA",
+        "countryName": "Ukraine",
+        "currencyCode": "UAH",
+        "symbol": "\u20b4",
+        "direction": "L",
+        "space": false,
+        "decimals": 2,
+        "currencyName": "Ukrainian Hryvnia"
+    },
+    "UGX": {
+        "countryCode": "UG",
+        "countryName": "Uganda",
+        "currencyCode": "UGX",
+        "symbol": "USh",
+        "direction": "L",
+        "space": false,
+        "decimals": 2,
+        "currencyName": "Ugandan Shilling"
+    },
+    "USD": {
+        "countryCode": "US",
+        "countryName": "United States Of America",
+        "currencyCode": "USD",
+        "symbol": "$",
+        "direction": "L",
+        "space": false,
+        "decimals": 2,
+        "currencyName": "US Dollar"
+    },
+    "UYU": {
+        "countryCode": "UY",
+        "countryName": "Uruguay",
+        "currencyCode": "UYU",
+        "symbol": "$U",
+        "direction": "L",
+        "space": false,
+        "decimals": 2,
+        "currencyName": "Uruguayan peso"
+    },
+    "UZS": {
+        "countryCode": "UZ",
+        "countryName": "Uzbekistan",
+        "currencyCode": "UZS",
+        "symbol": "\u043b\u0432",
+        "direction": "L",
+        "space": false,
+        "decimals": 2,
+        "currencyName": "Uzbekistani som"
+    },
+    "VND": {
+        "countryCode": "VN",
+        "countryName": "Vietnam",
+        "currencyCode": "VND",
+        "symbol": "\u20ab",
+        "direction": "L",
+        "space": false,
+        "decimals": 2,
+        "currencyName": "Vietnamese Dong"
+    },
+    "VUV": {
+        "countryCode": "VU",
+        "countryName": "Vanuatu",
+        "currencyCode": "VUV",
+        "symbol": "VT",
+        "direction": "R",
+        "space": false,
+        "decimals": 0,
+        "currencyName": "Ni-Vanuatu Vatu"
+    },
+    "WST": {
+        "countryCode": "WS",
+        "countryName": "Samoa",
+        "currencyCode": "WST",
+        "symbol": "$",
+        "direction": "L",
+        "space": false,
+        "decimals": 2,
+        "currencyName": "Samoan T\u0101l\u0101"
+    },
+    "YER": {
+        "countryCode": "YE",
+        "countryName": "Yemen",
+        "currencyCode": "YER",
+        "symbol": "",
+        "direction": null,
+        "space": false,
+        "decimals": 2,
+        "currencyName": "Yemeni Rial"
+    },
+    "ZAR": {
+        "countryCode": "ZA",
+        "countryName": "South Africa",
+        "currencyCode": "ZAR",
+        "symbol": "R",
+        "direction": "L",
+        "space": false,
+        "decimals": 2,
+        "currencyName": "South African Rand"
+    }
+}
