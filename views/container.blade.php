@@ -1,8 +1,5 @@
 @extends($extends)
 @section("content")
-
-
-
 <div class="p-8 bg-white border-t">
     <div class="w-full items-end">
         <h2 class="text-3xl font-semibold mb-3" style="line-height: 1em">@lang("Currency Management")</h2>
@@ -17,12 +14,7 @@
             <label class="text-sm font-normal mr-3">Fixer API Key:</label>
             <input type="text" class="border rounded shadow py-1 px-2" name="api_key">
         </div>
-        <h3 class="text-2xl font-semibold mb-3" style="line-height: 1em">@lang("Enabled Currencies")</h3>
-        <div class="flex items-stretch flex-wrap">
-            @foreach($currencies as $currency)
-                @livewire("paksuco-currency::currencies", ["currency" => $currency])
-            @endforeach
-        </div>
+        @livewire("paksuco-currency::currencies")
     </div>
 </div>
 @endsection

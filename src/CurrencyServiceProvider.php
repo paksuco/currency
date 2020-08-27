@@ -78,6 +78,7 @@ class CurrencyServiceProvider extends ServiceProvider
         $this->publishes([__DIR__ . '/../views' => base_path('resources/views/paksuco/currency')]);
 
         Livewire::component("paksuco-currency::currencies", Components\Currencies::class);
+        Livewire::component("paksuco-currency::currency", Components\Currency::class);
     }
 
     private function handleMigrations()

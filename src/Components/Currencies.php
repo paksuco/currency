@@ -7,17 +7,28 @@ use Paksuco\Currency\Models\Currency;
 
 class Currencies extends Component
 {
-    public $currency;
+    public $currencies;
 
-    public function mount(Currency $currency)
+    public $query;
+
+    public function mount()
     {
-        $this->currency = $currency;
+        $this->currencies = Currency::query()
+            ->orderByDesc("active")
+            ->orderBy("currency_code")
+            ->get();
     }
 
-    public function toggleCurrency()
+    public function updatedQuery()
     {
-        $this->currency->active = !$this->currency->active;
-        $this->currency->save();
+        $this->currencies = Currency::query()
+            ->where("currency_code", "like", "%" . $this->query . "%")
+            ->orWhere("currency_name", "like", "%" . $this->query . "%")
+            ->orWhere("country_code", "like", "%" . $this->query . "%")
+            ->orWhere("country_name", "like", "%" . $this->query . "%")
+            ->orderByDesc("active")
+            ->orderBy("currency_code")
+            ->get();
     }
 
     public function render()

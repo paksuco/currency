@@ -143,7 +143,7 @@
         "countryCode": "BH",
         "countryName": "Bahrain",
         "currencyCode": "BHD",
-        "symbol": ".\u062f.\u0628 or BD",
+        "symbol": "BD",
         "direction": "L",
         "space": false,
         "decimals": 3,
@@ -287,7 +287,7 @@
         "direction": "L",
         "space": false,
         "decimals": 2,
-        "currencyName": "Yuan or chinese renminbi"
+        "currencyName": "Yuan"
     },
     "COP": {
         "countryCode": "CO",
@@ -783,7 +783,7 @@
         "countryCode": "LS",
         "countryName": "Lesotho",
         "currencyCode": "LSL",
-        "symbol": "L or M",
+        "symbol": "M",
         "direction": "L",
         "space": false,
         "decimals": 2,
@@ -1213,7 +1213,7 @@
         "countryCode": "SZ",
         "countryName": "Swaziland",
         "currencyCode": "SZL",
-        "symbol": "L or E",
+        "symbol": "E",
         "direction": "L",
         "space": false,
         "decimals": 2,
