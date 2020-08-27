@@ -2,6 +2,8 @@
 
 namespace Paksuco\Currency\Controllers;
 
+use Paksuco\Currency\Models\Currency;
+
 class CurrencyController extends \App\Http\Controllers\Controller
 {
     private $extends;
@@ -14,6 +16,9 @@ class CurrencyController extends \App\Http\Controllers\Controller
 
     public function index()
     {
-        return view("paksuco-currency::container", ["extends" => $this->extends]);
+        return view("paksuco-currency::container", [
+            "extends" => $this->extends,
+            "currencies" => Currency::orderByDesc("active")->get()
+        ]);
     }
 }

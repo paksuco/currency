@@ -24,6 +24,7 @@ class CreateCurrencyTables extends Migration
             $table->boolean("space");
             $table->string("symbol", 12);
             $table->integer("decimals");
+            $table->boolean("active")->default(0);
             $table->decimal("rate", 12, 4, true)->default(1);
             $table->timestamps();
         });
