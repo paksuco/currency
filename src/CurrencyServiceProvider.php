@@ -63,19 +63,19 @@ class CurrencyServiceProvider extends ServiceProvider
 
         $this->publishes([$configPath => base_path('config/currencies.php')]);
 
-        $this->mergeConfigFrom($configPath, 'currency');
+        $this->mergeConfigFrom($configPath, 'currencies');
     }
 
     private function handleTranslations()
     {
-        $this->loadTranslationsFrom(__DIR__ . '/../lang', 'currency');
+        $this->loadTranslationsFrom(__DIR__ . '/../lang', 'currency-ui');
     }
 
     private function handleViews()
     {
         $this->loadViewsFrom(__DIR__ . '/../views', 'paksuco-currency');
 
-        $this->publishes([__DIR__ . '/../views' => base_path('resources/views/paksuco/currency')]);
+        $this->publishes([__DIR__ . '/../views' => base_path('resources/views/vendor/paksuco-currency')]);
 
         Livewire::component("paksuco-currency::currencies", Components\Currencies::class);
         Livewire::component("paksuco-currency::currency", Components\Currency::class);
