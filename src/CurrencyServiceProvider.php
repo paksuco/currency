@@ -2,6 +2,7 @@
 
 namespace Paksuco\Currency;
 
+use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
 use Livewire\Livewire;
@@ -34,6 +35,17 @@ class CurrencyServiceProvider extends ServiceProvider
                     $container->addItem("Currencies", route("paksuco.currencies.admin"), "fas fa-coins");
                 }
             }
+        });
+
+        if ($this->app->runningInConsole()) {
+            $this->commands([
+                \Paksuco\Currency\Commands\CurrencyUpdate::class
+            ]);
+        }
+
+        $this->app->booted(function () {
+            $schedule = app(Schedule::class);
+            $schedule->command('currency:update')->everyThreeHours();
         });
     }
 

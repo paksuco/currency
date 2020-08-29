@@ -10,10 +10,6 @@
             Sed et porttitor ex. Morbi pellentesque massa a velit gravida, vitae rutrum tortor consequat. Donec
             interdum lacus ut sem consectetur elementum. Proin pellentesque maximus sem sed rhoncus. Cras eget
             neque a nisi posuere mollis vitae vitae magna. Praesent non volutpat sem, a maximus libero. </p>
-        <div class="flex items-center my-4">
-            <label class="text-sm font-normal mr-3">Fixer API Key:</label>
-            <input type="text" class="border rounded shadow py-1 px-2" name="api_key">
-        </div>
         @livewire("paksuco-currency::currencies")
     </div>
 </div>
