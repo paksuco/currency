@@ -2,6 +2,7 @@
 
 namespace Paksuco\Currency\Components;
 
+use Illuminate\Support\Facades\Cache;
 use Livewire\Component;
 use Paksuco\Currency\Models\Currency as CurrencyModel;
 
@@ -17,6 +18,7 @@ class Currency extends Component
     public function toggleCurrency()
     {
         $this->currency->active = !$this->currency->active;
+        Cache::forget("system_currencies");
         $this->currency->save();
     }
 

@@ -11,9 +11,14 @@ class CreateCurrencyTables extends Migration
      * Run the migrations.
      *
      * @return void
+     *
      */
     public function up()
     {
+        $usersTable = config("currencies.users_table", "users");
+        $usersColumn = config("currencies.currency_column", "currency_id");
+        $usersHaveCurrencies = config("currencies.users_have_currencies", false);
+
         Schema::create("currencies", function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('country_code');
@@ -48,6 +53,19 @@ class CreateCurrencyTables extends Migration
                 "rate" => 1,
             ]);
         }
+
+        if ($usersHaveCurrencies) {
+            if (Schema::hasTable($usersTable)) {
+                if (Schema::hasColumn($usersTable, $usersColumn) == false) {
+                    Schema::table($usersTable, function (Blueprint $table) use ($usersColumn) {
+                        $table->foreignId($usersColumn)->nullable();
+                        $table->foreign($usersColumn)
+                            ->references("id")
+                            ->on("currencies")->nullOnDelete();
+                    });
+                }
+            }
+        }
     }
 
     /**
@@ -57,6 +75,18 @@ class CreateCurrencyTables extends Migration
      */
     public function down()
     {
+        $usersTable = config("currencies.users_table", "users");
+        $usersColumn = config("currencies.currency_column", "currency_id");
+
+        Schema::disableForeignKeyConstraints();
+        if (Schema::hasTable($usersTable)) {
+            if (Schema::hasColumn($usersTable, $usersColumn)) {
+                Schema::table($usersTable, function (Blueprint $table) use ($usersColumn) {
+                    $table->dropColumn($usersColumn);
+                });
+            }
+        }
         Schema::drop("currencies");
+        Schema::enableForeignKeyConstraints();
     }
 }

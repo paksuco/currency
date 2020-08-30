@@ -20,4 +20,34 @@ return [
      * Your admin template layout to extend
      */
     'template_to_extend' => "layouts.app",
+
+    /**
+     * Default currency to show when no default is selected
+     */
+    'default' => 'USD',
+
+    /**
+     * Use client country when there's no currency set?
+     */
+    'use_client' => false,
+
+    /**
+     * Saving the current currency method
+     */
+    'method' => 'session',
+
+    /**
+     * Create currency configuration per user?
+     */
+    'users_have_currencies' => true,
+
+    /**
+     * Will create currency per user column
+     */
+    'users_table' => 'users',
+
+    /**
+     * Will use the column name to create user currency id
+     */
+    'currency_column' => 'currency_id',
 ];

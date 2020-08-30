@@ -3,9 +3,12 @@
 namespace Paksuco\Currency;
 
 use Illuminate\Console\Scheduling\Schedule;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
 use Livewire\Livewire;
+use Paksuco\Currency\Facades\Currency;
+use Paksuco\Settings\Facades\Settings;
 
 class CurrencyServiceProvider extends ServiceProvider
 {
@@ -39,14 +42,23 @@ class CurrencyServiceProvider extends ServiceProvider
 
         if ($this->app->runningInConsole()) {
             $this->commands([
-                \Paksuco\Currency\Commands\CurrencyUpdate::class
+                \Paksuco\Currency\Commands\CurrencyUpdate::class,
             ]);
         }
 
         $this->app->booted(function () {
-            $schedule = app(Schedule::class);
-            $schedule->command('currency:update')->everyThreeHours();
+            if (Settings::get("fixer_api_key", "") != "") {
+                $schedule = app(Schedule::class);
+                $schedule->command('currency:update')->everyThreeHours();
+            }
         });
+
+        $this->app['router']
+            ->pushMiddlewareToGroup(
+                'web',
+                \Paksuco\Currency\Middleware\SetUserCurrency::class
+            );
+
     }
 
     /**
@@ -56,7 +68,9 @@ class CurrencyServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        // Bind any implementations.
+        $this->app->bind("currency", function () {
+            return new \Paksuco\Currency\Services\Currency();
+        });
     }
 
     /**
@@ -66,7 +80,9 @@ class CurrencyServiceProvider extends ServiceProvider
      */
     public function provides()
     {
-        return [];
+        return [
+            \Paksuco\Currency\Services\Currency::class,
+        ];
     }
 
     private function handleConfigs()
