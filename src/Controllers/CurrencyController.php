@@ -2,9 +2,10 @@
 
 namespace Paksuco\Currency\Controllers;
 
+use Illuminate\Routing\Controller as BaseController;
 use Paksuco\Currency\Models\Currency;
 
-class CurrencyController extends \App\Http\Controllers\Controller
+class CurrencyController extends BaseController
 {
     private $extends;
 
