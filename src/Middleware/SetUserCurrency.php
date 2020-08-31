@@ -4,7 +4,6 @@ namespace Paksuco\Currency\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Jenssegers\Agent\Agent;
 use Paksuco\Currency\Facades\Currency;
 use Paksuco\Currency\Models\Currency as ModelsCurrency;
@@ -24,7 +23,7 @@ class SetUserCurrency
         return $this->setSystemCurrency($request);
     }
 
-    private function setSystemCurrency(Request $request)
+    private function setSystemCurrency()
     {
         $agent = new Agent();
         $available = $agent->languages();

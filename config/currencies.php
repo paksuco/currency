@@ -50,4 +50,9 @@ return [
      * Will use the column name to create user currency id
      */
     'currency_column' => 'currency_id',
+
+    /**
+     * Fixer IO API Key to retrieve currencies
+     */
+    'fixer_api_key' => env("FIXER_API_KEY", "")
 ];
