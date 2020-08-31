@@ -58,7 +58,6 @@ class CurrencyServiceProvider extends ServiceProvider
                 'web',
                 \Paksuco\Currency\Middleware\SetUserCurrency::class
             );
-
     }
 
     /**
@@ -89,7 +88,7 @@ class CurrencyServiceProvider extends ServiceProvider
     {
         $configPath = __DIR__ . '/../config/currencies.php';
 
-        $this->publishes([$configPath => base_path('config/currencies.php')]);
+        $this->publishes([$configPath => base_path('config/currencies.php')], "config");
 
         $this->mergeConfigFrom($configPath, 'currencies');
     }
@@ -103,7 +102,7 @@ class CurrencyServiceProvider extends ServiceProvider
     {
         $this->loadViewsFrom(__DIR__ . '/../views', 'paksuco-currency');
 
-        $this->publishes([__DIR__ . '/../views' => base_path('resources/views/vendor/paksuco-currency')]);
+        $this->publishes([__DIR__ . '/../views' => base_path('resources/views/vendor/paksuco-currency')], "views");
 
         Livewire::component("paksuco-currency::currencies", Components\Currencies::class);
         Livewire::component("paksuco-currency::currency", Components\Currency::class);
@@ -111,7 +110,7 @@ class CurrencyServiceProvider extends ServiceProvider
 
     private function handleMigrations()
     {
-        $this->publishes([__DIR__ . '/../migrations' => base_path('database/migrations')]);
+        $this->publishes([__DIR__ . '/../migrations' => base_path('database/migrations')], "migrations");
     }
 
     private function handleRoutes()
