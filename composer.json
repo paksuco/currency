@@ -21,7 +21,7 @@
     "illuminate/routing": "^7.0",
     "livewire/livewire": "^1.2",
     "jenssegers/agent": "^2.6.4",
-    "paksuco/settings": "^1.0.0"
+    "paksuco/settings": "@dev"
   },
   "require-dev": {
     "phpunit/phpunit": "^6.3"
@@ -46,6 +46,15 @@
       }
     }
   },
+  "repositories": [
+    {
+      "type": "path",
+      "url": "../settings",
+      "options": {
+        "symlink": true
+      }
+    }
+  ],
   "minimum-stability": "dev",
   "prefer-stable": true
 }
