@@ -10,7 +10,7 @@
             ({{$currency->country_code}})</div>
         <div
              class="text-lg mt-2 text-right p-1 px-2 bottom-0 inset-x-0 {{$currency->active ? 'bg-indigo-900' : 'bg-gray-100'}} rounded-b">
-            {!! $currency->format(1) !!} <i class="fa fa-arrows-alt-h px-1"></i> {!! $currency->convert(1, 'TRY', true)
+            {!! $currency->format(1, 4) !!} <i class="fa fa-arrows-alt-h px-1"></i> {!! $currency->convert(1, 'TRY', true, 4)
             !!}
         </div>
     </div>

@@ -14,7 +14,7 @@ class Currency extends Model
         return preg_match($rtlChar, $this->symbol) != 0;
     }
 
-    public function format($value)
+    public function format($value, $override_decimalNumber = null)
     {
         $symbol = $this->symbol;
         $direction = $this->direction;
@@ -35,7 +35,7 @@ class Currency extends Model
             }
         }
 
-        $output .= number_format($value, $this->decimals);
+        $output .= number_format($value, $override_decimalNumber ? $override_decimalNumber : $this->decimals);
 
         if ($direction == "R") {
             if ($space) {
@@ -49,7 +49,7 @@ class Currency extends Model
         return trim($output);
     }
 
-    public function convert($value, $to, $format = false)
+    public function convert($value, $to, $format = false, $override_decimalNumber = null)
     {
         if (!($to instanceof Currency)) {
             $to = Currency::where(['currency_code' => $to])->first();
@@ -64,11 +64,17 @@ class Currency extends Model
             return $value;
         }
 
-        return $to->format($value);
+        return $to->format($value, $override_decimalNumber);
     }
 
     public function from($value, Currency $currency)
     {
-        return ($value / $currency->rate) * $this->rate;
+        $round = ($value / $currency->rate) * $this->rate;
+        $round2 = round($round, 4);
+        if ($round > $round2) {
+            $round2 += 1 / pow(10, 4);
+        }
+
+        return $round2;
     }
 }

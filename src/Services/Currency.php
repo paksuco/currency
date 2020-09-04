@@ -4,6 +4,7 @@ namespace Paksuco\Currency\Services;
 
 use DateInterval;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Session;
@@ -26,12 +27,12 @@ class Currency
 
     public function auth()
     {
-        if (config("currencies.users_have_currencies", false) === false || auth()->check() == false) {
+        if (config("currencies.users_have_currencies", false) === false || Auth::check() == false) {
             return false;
         }
 
-        $currency_id = auth()->currency_id;
-        $currency = $this->currencies->where("id", "=", $currency_id)->get();
+        $currency_id = Auth::user()->currency_id;
+        $currency = $this->currencies->where("id", "=", $currency_id)->first();
         if ($currency instanceof ModelsCurrency) {
             return $currency;
         }
@@ -70,7 +71,7 @@ class Currency
         Session::put('currency', $key) :
         setcookie('currency', $key, time() + (24 * 60 * 60), '/', url('/'), true, true);
 
-        if (config("currencies.users_have_currencies", false) === true && auth()->check()) {
+        if (config("currencies.users_have_currencies", false) === true && Auth::check()) {
             $user = request()->user();
             $user->{config("currencies.currency_column")} = $this->get($key)->id;
             $user->save();
