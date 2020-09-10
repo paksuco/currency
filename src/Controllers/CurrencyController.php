@@ -3,6 +3,7 @@
 namespace Paksuco\Currency\Controllers;
 
 use Illuminate\Routing\Controller as BaseController;
+use Paksuco\Currency\Facades\Currency as FacadesCurrency;
 use Paksuco\Currency\Models\Currency;
 
 class CurrencyController extends BaseController
@@ -21,5 +22,10 @@ class CurrencyController extends BaseController
             "extends" => $this->extends,
             "currencies" => Currency::orderByDesc("active")->get()
         ]);
+    }
+
+    public function set($id)
+    {
+        FacadesCurrency::set($id);
     }
 }
