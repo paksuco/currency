@@ -3,7 +3,6 @@
 namespace Paksuco\Currency;
 
 use Illuminate\Console\Scheduling\Schedule;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
 use Livewire\Livewire;
@@ -35,7 +34,13 @@ class CurrencyServiceProvider extends ServiceProvider
         Event::listen("paksuco.menu.beforeRender", function ($key, $container) {
             if ($key == "admin") {
                 if ($container->hasItem("Currencies") == false) {
-                    $container->addItem("Currencies", route("paksuco.currencies.admin"), "fas fa-coins");
+                    $container->addItem(
+                        "Currencies",
+                        route("paksuco.currencies.admin"),
+                        "fas fa-coins",
+                        null,
+                        config("currencies.menu_priority", 30)
+                    );
                 }
             }
         });

@@ -54,5 +54,10 @@ return [
     /**
      * Fixer IO API Key to retrieve currencies
      */
-    'fixer_api_key' => env("FIXER_API_KEY", "")
+    'fixer_api_key' => env("FIXER_API_KEY", ""),
+
+    /**
+     * If you're using Paksuco/Menu, you can set the priority here
+     */
+    'menu_priority' => 30
 ];
