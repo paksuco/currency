@@ -85,7 +85,7 @@ class Currency
 
     public function find($id)
     {
-        return $this->currencies->where("id", "=", $id)->first();
+        return $this->currencies->find($id);
     }
 
     public function getDefault()
