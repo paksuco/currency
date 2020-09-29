@@ -9,13 +9,6 @@ class Currency extends Model
 {
     protected $table = "currencies";
 
-    protected static function booted()
-    {
-        static::addGlobalScope('active', function (Builder $builder) {
-            $builder->where("active", "=", 1);
-        });
-    }
-
     public function format($value, $override_decimalNumber = null)
     {
         $symbol = $this->symbol;
@@ -49,6 +42,11 @@ class Currency extends Model
         $output .= "</div>";
 
         return trim($output);
+    }
+
+    public function scopeActive(Builder $query)
+    {
+        return $query->where("active", "=", true);
     }
 
     public function convert($value, $to, $format = false, $override_decimalNumber = null)
