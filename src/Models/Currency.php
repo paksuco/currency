@@ -2,16 +2,18 @@
 
 namespace Paksuco\Currency\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
 class Currency extends Model
 {
     protected $table = "currencies";
 
-    private function isRTL()
+    protected static function booted()
     {
-        $rtlChar = '/[\x{0590}-\x{083F}]|[\x{08A0}-\x{08FF}]|[\x{FB1D}-\x{FDFF}]|[\x{FE70}-\x{FEFF}]/u';
-        return preg_match($rtlChar, $this->symbol) != 0;
+        static::addGlobalScope('active', function (Builder $builder) {
+            $builder->where("active", "=", 1);
+        });
     }
 
     public function format($value, $override_decimalNumber = null)
