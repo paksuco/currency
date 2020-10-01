@@ -98,4 +98,16 @@ class Currency
     {
         return config("currencies.method", "session");
     }
+
+    public function format($model, $key)
+    {
+        $amount = floatval($model->$key) ?? 0;
+        $currency = $model->{$key . "_currency_id"} ?? null;
+
+        if ($amount && $currency) {
+            return ModelsCurrency::find($currency)->format($amount);
+        }
+
+        return $amount;
+    }
 }
