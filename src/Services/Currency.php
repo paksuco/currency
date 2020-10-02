@@ -21,7 +21,7 @@ class Currency
             ModelsCurrency::where("currency_code", "=", $default)->update([
                 "active" => true,
             ]);
-            return ModelsCurrency::where("active", "=", true)->get();
+            return ModelsCurrency::active()->get();
         });
     }
 
