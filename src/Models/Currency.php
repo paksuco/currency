@@ -77,34 +77,4 @@ class Currency extends Model
 
         return $round2;
     }
-
-    public function fromId($value, $id)
-    {
-        $currency = Currency::find($id);
-        if ($currency == null) {
-            throw new \Exception("Currency not found.");
-        }
-        $round = ($value / $currency->rate) * $this->rate;
-        $round2 = round($round, 4);
-        if ($round > $round2) {
-            $round2 += 1 / pow(10, 4);
-        }
-
-        return $round2;
-    }
-
-    public function fromCode($value, string $code)
-    {
-        $currency = Currency::where("currency_code", "=", $code)->first();
-        if ($currency == null) {
-            throw new \Exception("Currency not found.");
-        }
-        $round = ($value / $currency->rate) * $this->rate;
-        $round2 = round($round, 4);
-        if ($round > $round2) {
-            $round2 += 1 / pow(10, 4);
-        }
-
-        return $round2;
-    }
 }
