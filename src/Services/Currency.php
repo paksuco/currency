@@ -69,7 +69,7 @@ class Currency
 
         $driver == "session" ?
         Session::put('currency', $key) :
-        setcookie('currency', $key, time() + (24 * 60 * 60), '/', url('/'), true, true);
+        setcookie('currency', $key, time() + (24 * 60 * 60), '/', url('/'));
 
         if (config("currencies.users_have_currencies", false) === true && Auth::check()) {
             $user = request()->user();
