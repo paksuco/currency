@@ -105,7 +105,9 @@ class Currency
         $currency = $model->{$key . "_currency_id"} ?? null;
 
         if ($amount && $currency) {
-            return ModelsCurrency::find($currency)->format($amount);
+            /** @var ModelsCurrency */
+            $currencyModel = ModelsCurrency::find($currency);
+            return $currencyModel->convert($amount, $this->current(), true);
         }
 
         return $amount;
