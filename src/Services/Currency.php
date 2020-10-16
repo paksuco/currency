@@ -110,6 +110,6 @@ class Currency
             return $currencyModel->convert($amount, $this->current(), true);
         }
 
-        return $amount;
+        return $this->current()->format($amount);
     }
 }
