@@ -6,7 +6,6 @@ use DateInterval;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Session;
 use Paksuco\Currency\Models\Currency as ModelsCurrency;
 
@@ -106,7 +105,9 @@ class Currency
 
         if ($amount && $currency) {
             /** @var ModelsCurrency */
-            $currencyModel = ModelsCurrency::find($currency);
+            $currencyModel = Cache::remember("currency_model_$currency", new \DateInterval("PT1H"), function () use ($currency) {
+                return ModelsCurrency::find($currency);
+            });
             return $currencyModel->convert($amount, $this->current(), true);
         }
 
