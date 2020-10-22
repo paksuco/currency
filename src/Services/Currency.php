@@ -98,6 +98,22 @@ class Currency
         return config("currencies.method", "session");
     }
 
+    public function toCurrent($model, $key)
+    {
+        $amount = floatval($model->$key) ?? 0;
+        $currency = $model->{$key . "_currency_id"} ?? null;
+
+        if ($amount && $currency) {
+            /** @var ModelsCurrency */
+            $currencyModel = Cache::remember("currency_model_$currency", new \DateInterval("PT1H"), function () use ($currency) {
+                return ModelsCurrency::find($currency);
+            });
+            return $currencyModel->convert($amount, $this->current(), false);
+        }
+
+        return $amount;
+    }
+
     public function format($model, $key)
     {
         $amount = floatval($model->$key) ?? 0;
