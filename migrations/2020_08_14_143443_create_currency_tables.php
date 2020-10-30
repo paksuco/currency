@@ -34,6 +34,15 @@ class CreateCurrencyTables extends Migration
             $table->timestamps();
         });
 
+        Schema::create('currency_history', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string("currency_code");
+            $table->string("base_currency");
+            $table->decimal("rate", 12, 4, true)->default(1);
+            $table->datetime("currency_at");
+            $table->timestamps();
+        });
+
         $currencies = json_decode(
             file_get_contents(
                 base_path("database/migrations/currencies.json")
@@ -86,7 +95,8 @@ class CreateCurrencyTables extends Migration
                 });
             }
         }
-        Schema::drop("currencies");
+        Schema::dropIfExists("currencies");
+        Schema::dropIfExists("currency_history");
         Schema::enableForeignKeyConstraints();
     }
 }

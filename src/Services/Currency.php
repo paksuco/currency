@@ -98,7 +98,7 @@ class Currency
         return config("currencies.method", "session");
     }
 
-    public function toCurrent($model, $key)
+    public function toCurrent($model, $key, $when = null)
     {
         $amount = floatval($model->$key) ?? 0;
         $currency = $model->{$key . "_currency_id"} ?? null;
@@ -108,13 +108,13 @@ class Currency
             $currencyModel = Cache::remember("currency_model_$currency", new \DateInterval("PT1H"), function () use ($currency) {
                 return ModelsCurrency::find($currency);
             });
-            return $currencyModel->convert($amount, $this->current(), false);
+            return $currencyModel->convert($amount, $this->current(), false, $when);
         }
 
         return $amount;
     }
 
-    public function format($model, $key)
+    public function format($model, $key, $when = null)
     {
         $amount = floatval($model->$key) ?? 0;
         $currency = $model->{$key . "_currency_id"} ?? null;
@@ -124,7 +124,8 @@ class Currency
             $currencyModel = Cache::remember("currency_model_$currency", new \DateInterval("PT1H"), function () use ($currency) {
                 return ModelsCurrency::find($currency);
             });
-            return $currencyModel->convert($amount, $this->current(), true);
+
+            return $currencyModel->convert($amount, $this->current(), true, $when);
         }
 
         return $this->current()->format($amount);

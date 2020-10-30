@@ -2,6 +2,7 @@
 
 namespace Paksuco\Currency\Models;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
@@ -49,7 +50,7 @@ class Currency extends Model
         return $query->where("active", "=", true);
     }
 
-    public function convert($value, $to, $format = false, $override_decimalNumber = null)
+    public function convert($value, $to, $format = false, $override_decimalNumber = null, $when = null)
     {
         if (!($to instanceof Currency)) {
             $to = Currency::where(['currency_code' => $to])->first();
@@ -58,7 +59,7 @@ class Currency extends Model
             }
         }
 
-        $value = $to->from($value, $this);
+        $value = $to->from($value, $this, $when);
 
         if (!$format) {
             return $value;
@@ -67,9 +68,19 @@ class Currency extends Model
         return $to->format($value, $override_decimalNumber);
     }
 
-    public function from($value, Currency $currency)
+    public function from($value, Currency $currency, $when = null)
     {
-        $round = ($value / $currency->rate) * $this->rate;
+        if ($when == null) {
+            $rate = $currency->rate;
+        } else {
+            $thatday = DB::select("select max(currency_at) as thatday from currency_history where currency_at < :when", [
+                "when" => $when
+            ])[0]->thatday;
+            $rate = CurrencyHistory::where("currency_code", "=", $currency->currency_code)
+                ->where("currency_at", "=", $thatday)->first()->rate;
+        }
+
+        $round = ($value / $rate) * $this->rate;
         $round2 = round($round, 4);
         if ($round > $round2) {
             $round2 += 1 / pow(10, 4);

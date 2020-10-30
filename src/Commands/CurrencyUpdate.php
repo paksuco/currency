@@ -3,7 +3,9 @@
 namespace Paksuco\Currency\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Support\Carbon;
 use Paksuco\Currency\Models\Currency;
+use Paksuco\Currency\Models\CurrencyHistory;
 use Paksuco\Settings\Facades\Settings;
 
 class CurrencyUpdate extends Command
@@ -39,7 +41,7 @@ class CurrencyUpdate extends Command
      */
     public function handle()
     {
-// set API Endpoint and API key
+        // set API Endpoint and API key
         $endpoint = 'latest';
         $access_key = Settings::get('fixer_api_key', "");
 
@@ -47,24 +49,30 @@ class CurrencyUpdate extends Command
             return 0;
         }
 
-// Initialize CURL:
+        // Initialize CURL:
         $ch = curl_init('http://data.fixer.io/api/' . $endpoint . '?access_key=' . $access_key . '');
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
-// Store the data:
+        // Store the data:
         $json = curl_exec($ch);
         curl_close($ch);
 
-// Decode JSON response:
+        // Decode JSON response:
         $exchangeRates = json_decode($json, true);
 
-        if ($exchangeRates["success"]) {
+        if ($exchangeRates && $exchangeRates["success"]) {
             $currencies = $exchangeRates["rates"];
             foreach ($currencies as $key => $value) {
                 $currency = Currency::where("currency_code", "=", $key)->first();
                 if ($currency instanceof Currency) {
                     $currency->rate = $value;
                     $currency->save();
+                    CurrencyHistory::create([
+                        "base_currency" => $exchangeRates["base"],
+                        "currency_code" => $key,
+                        "rate" => $value,
+                        "currency_at" => Carbon::createFromTimestamp($exchangeRates["timestamp"])
+                    ]);
                 }
             }
         }
