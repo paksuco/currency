@@ -7,7 +7,9 @@ use DateInterval;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\URL;
 use Paksuco\Currency\Models\Currency as ModelsCurrency;
 use Paksuco\Currency\Models\CurrencyHistory;
 use Paksuco\Settings\Facades\Settings;
@@ -15,21 +17,23 @@ use Paksuco\Settings\Facades\Settings;
 class Currency
 {
     private $currencies;
+    private $request;
 
-    public function __construct()
+    public function __construct(Request $request)
     {
         $this->currencies = Cache::remember('system_currencies', new DateInterval("PT1H"), function () {
-            $default = config("currencies.default", "USD");
+            $default = Config::get("currencies.default", "USD");
             ModelsCurrency::where("currency_code", "=", $default)->update([
                 "active" => true,
             ]);
             return ModelsCurrency::active()->get();
         });
+        $this->request = $request;
     }
 
     public function auth()
     {
-        if (config("currencies.users_have_currencies", false) === false || Auth::check() == false) {
+        if (Auth::check() == false || Config::get("currencies.users_have_currencies", false) === false) {
             return false;
         }
 
@@ -46,12 +50,9 @@ class Currency
     {
         $driver = $this->driver();
 
-        /** @var Request $request */
-        $request = request();
-
         $key = $driver == "session" ?
-        $request->session()->get('currency', null) :
-        $request->cookie('currency');
+        $this->request->session()->get('currency', null) :
+        $this->request->cookie('currency');
 
         return $key ? $this->get($key) : null;
     }
@@ -71,11 +72,12 @@ class Currency
 
         $driver == "session" ?
         Session::put('currency', $key) :
-        setcookie('currency', $key, time() + (24 * 60 * 60), '/', url('/'));
+        setcookie('currency', $key, time() + (24 * 60 * 60), '/', URL::to('/'));
 
-        if (config("currencies.users_have_currencies", false) === true && Auth::check()) {
-            $user = request()->user();
-            $user->{config("currencies.currency_column")} = $this->get($key)->id;
+        if (Auth::check() && Config::get("currencies.users_have_currencies", false) === true) {
+            /** @var App\User */
+            $user = Auth::user();
+            $user->setAttribute(Config::get("currencies.currency_column"), $this->get($key)->id);
             $user->save();
         }
     }
@@ -92,13 +94,13 @@ class Currency
 
     public function getDefault()
     {
-        $default = config("currencies.default", "USD");
+        $default = Config::get("currencies.default", "USD");
         return $this->get($default);
     }
 
     public function driver()
     {
-        return config("currencies.method", "session");
+        return Config::get("currencies.method", "session");
     }
 
     public function toCurrent($model, $key, $when = null, $roundUp = false)

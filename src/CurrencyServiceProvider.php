@@ -76,9 +76,7 @@ class CurrencyServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind("currency", function () {
-            return new \Paksuco\Currency\Services\Currency();
-        });
+        $this->app->bind("currency", \Paksuco\Currency\Services\Currency::class);
     }
 
     /**
