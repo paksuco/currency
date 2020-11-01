@@ -53,8 +53,9 @@ class CurrencyServiceProvider extends ServiceProvider
 
         $this->app->booted(function () {
             if (Settings::get("fixer_api_key", "") != "") {
+                /** @var \Illuminate\Console\Scheduling\Schedule */
                 $schedule = app(Schedule::class);
-                $schedule->command('currency:update')->everyThreeHours();
+                $schedule->command('currency:update')->everyTwoHours();
             }
         });
 

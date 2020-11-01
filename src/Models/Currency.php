@@ -4,6 +4,7 @@ namespace Paksuco\Currency\Models;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
 
 class Currency extends Model
@@ -77,11 +78,22 @@ class Currency extends Model
         if ($when == null) {
             $rate = $currency->rate;
         } else {
+
             $thatday = DB::select("select max(currency_at) as thatday from currency_history where currency_at < :when", [
                 "when" => $when,
             ])[0]->thatday;
-            $rate = CurrencyHistory::where("currency_code", "=", $currency->currency_code)
-                ->where("currency_at", "=", $thatday)->first()->rate;
+
+            if ($thatday != null) {
+                $rate = CurrencyHistory::where("currency_code", "=", $currency->currency_code)
+                    ->where("currency_at", "=", $thatday)->first()->rate;
+            } else {
+                Artisan::call("currency:update --date=" . $when->format("Y-m-d"));
+                $thatday = DB::select("select max(currency_at) as thatday from currency_history where currency_at < :when", [
+                    "when" => $when,
+                ])[0]->thatday;
+                $rate = CurrencyHistory::where("currency_code", "=", $currency->currency_code)
+                    ->where("currency_at", "=", $thatday)->first()->rate;
+            }
         }
 
         $round = ($value / $rate) * $this->rate;

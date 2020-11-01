@@ -15,7 +15,8 @@ class CurrencyUpdate extends Command
      *
      * @var string
      */
-    protected $signature = 'currency:update';
+    protected $signature = 'currency:update
+    {--date=? : Date for getting historical data, formatted as YYYY-MM-DD}';
 
     /**
      * The console command description.
@@ -42,7 +43,9 @@ class CurrencyUpdate extends Command
     public function handle()
     {
         // set API Endpoint and API key
+        $date = $this->option("date");
         $endpoint = 'latest';
+        if($date) $endpoint = $date;
         $access_key = Settings::get('fixer_api_key', "");
 
         if ($access_key == "") {
@@ -67,12 +70,14 @@ class CurrencyUpdate extends Command
                 if ($currency instanceof Currency) {
                     $currency->rate = $value;
                     $currency->save();
-                    CurrencyHistory::create([
-                        "base_currency" => $exchangeRates["base"],
-                        "currency_code" => $key,
-                        "rate" => $value,
-                        "currency_at" => Carbon::createFromTimestamp($exchangeRates["timestamp"])
-                    ]);
+                    if($currency->active){
+                        CurrencyHistory::create([
+                            "base_currency" => $exchangeRates["base"],
+                            "currency_code" => $key,
+                            "rate" => $value,
+                            "currency_at" => $date ? Carbon::createFromFormat("Y-m-d", $date)->startOfDay() : Carbon::createFromTimestamp($exchangeRates["timestamp"])
+                        ]);
+                    }
                 }
             }
         }
