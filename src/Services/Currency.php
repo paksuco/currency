@@ -107,12 +107,14 @@ class Currency
     {
         $amount = floatval($model->$key) ?? 0;
         $currency = $model->{$key . "_currency_id"} ?? null;
+        $currency = intval($currency);
 
         if ($amount && $currency) {
             /** @var ModelsCurrency */
             $currencyModel = Cache::remember("currency_model_$currency", new \DateInterval("PT1H"), function () use ($currency) {
                 return ModelsCurrency::find($currency);
             });
+
             return $currencyModel->convert($amount, $this->current(), false, $when, $roundUp);
         }
 
@@ -136,7 +138,7 @@ class Currency
         return $this->current()->format($amount);
     }
 
-    public function update($date = null)
+    public function updateRates($date = null)
     {
         // set API Endpoint and API key
         $endpoint = 'latest';

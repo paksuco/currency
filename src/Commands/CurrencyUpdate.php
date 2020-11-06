@@ -13,7 +13,7 @@ class CurrencyUpdate extends Command
      * @var string
      */
     protected $signature = 'currency:update
-    {--date=? : Date for getting historical data, formatted as YYYY-MM-DD}';
+    {--date=null : Date for getting historical data, formatted as YYYY-MM-DD}';
 
     /**
      * The console command description.
@@ -40,6 +40,7 @@ class CurrencyUpdate extends Command
     public function handle()
     {
         $date = $this->option("date");
-        Currency::update($date);
+        $date = $date == "null" ? null : $date;
+        Currency::updateRates($date);
     }
 }
