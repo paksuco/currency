@@ -105,6 +105,7 @@ class Currency
 
     public function toCurrent($model, $key, $when = null, $roundUp = false)
     {
+        $model = (object) $model;
         $amount = floatval($model->$key) ?? 0;
         $currency = $model->{$key . "_currency_id"} ?? null;
         $currency = intval($currency);
@@ -123,6 +124,7 @@ class Currency
 
     public function format($model, $key, $when = null, $roundUp = false)
     {
+        $model = (object) $model;
         $amount = floatval($model->$key) ?? 0;
         $currency = $model->{$key . "_currency_id"} ?? null;
 
