@@ -54,7 +54,7 @@ class Currency
         $this->request->session()->get('currency', null) :
         $this->request->cookie('currency');
 
-        return $key ? $this->get($key) : null;
+        return ($key ? $this->get($key) : null) ?? $this->getDefault();
     }
 
     public function get($key)
