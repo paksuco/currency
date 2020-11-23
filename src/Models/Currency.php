@@ -4,7 +4,6 @@ namespace Paksuco\Currency\Models;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
 use Paksuco\Currency\Facades\Currency as FacadesCurrency;
 
@@ -79,7 +78,6 @@ class Currency extends Model
         if ($when == null) {
             $rate = $currency->rate;
         } else {
-
             $thatday = DB::select("select max(currency_at) as thatday from currency_history where currency_at < :when", [
                 "when" => $when,
             ])[0]->thatday;

@@ -57,13 +57,18 @@ class Currency
         return ($key ? $this->get($key) : null) ?? $this->getDefault();
     }
 
-    public function get($key)
+    public function get($key): ModelsCurrency
     {
         if (!$key) {
             return null;
         }
 
         return $this->currencies->where("currency_code", $key)->first() ?? null;
+    }
+
+    public function getCode($id)
+    {
+        return $this->find($id)->currency_code;
     }
 
     public function set($key)
@@ -87,12 +92,12 @@ class Currency
         return $this->currencies;
     }
 
-    public function find($id)
+    public function find($id): ModelsCurrency
     {
         return $this->currencies->find($id);
     }
 
-    public function getDefault()
+    public function getDefault(): ModelsCurrency
     {
         $default = Config::get("currencies.default", "USD");
         return $this->get($default);
