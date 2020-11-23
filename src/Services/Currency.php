@@ -4,6 +4,7 @@ namespace Paksuco\Currency\Services;
 
 use Carbon\Carbon;
 use DateInterval;
+use Facebook\WebDriver\Exception\SessionNotCreatedException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
@@ -48,13 +49,17 @@ class Currency
 
     public function current()
     {
-        $driver = $this->driver();
+        try {
+            $driver = $this->driver();
 
-        $key = $driver == "session" ?
-        $this->request->session()->get('currency', null) :
-        $this->request->cookie('currency');
+            $key = $driver == "session" ?
+            $this->request->session()->get('currency', null) :
+            $this->request->cookie('currency');
 
-        return ($key ? $this->get($key) : null) ?? $this->getDefault();
+            return ($key ? $this->get($key) : null) ?? $this->getDefault();
+        } catch (RuntimeException $ex) {
+            return $this->getDefault();
+        }
     }
 
     public function get($key): ModelsCurrency
