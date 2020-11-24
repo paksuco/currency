@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\URL;
 use Paksuco\Currency\Models\Currency as ModelsCurrency;
 use Paksuco\Currency\Models\CurrencyHistory;
 use Paksuco\Settings\Facades\Settings;
+use RuntimeException;
 
 class Currency
 {
@@ -47,17 +48,19 @@ class Currency
         return false;
     }
 
-    public function current()
+    public function current($fallbackCurrencyId = null)
     {
         try {
             $driver = $this->driver();
-
             $key = $driver == "session" ?
             $this->request->session()->get('currency', null) :
             $this->request->cookie('currency');
 
             return ($key ? $this->get($key) : null) ?? $this->getDefault();
         } catch (RuntimeException $ex) {
+            if ($fallbackCurrencyId) {
+                return $this->find($fallbackCurrencyId) ?? $this->getDefault();
+            }
             return $this->getDefault();
         }
     }
@@ -113,7 +116,7 @@ class Currency
         return Config::get("currencies.method", "session");
     }
 
-    public function toCurrent($model, $key, $when = null, $roundUp = false)
+    public function toCurrent($model, $key, $when = null, $roundUp = false, $fallbackCurrencyId = null)
     {
         $model = (object) $model;
         $amount = floatval($model->$key) ?? 0;
@@ -126,13 +129,13 @@ class Currency
                 return ModelsCurrency::find($currency);
             });
 
-            return $currencyModel->convert($amount, $this->current(), false, $when, $roundUp);
+            return $currencyModel->convert($amount, $this->current($fallbackCurrencyId), false, $when, $roundUp);
         }
 
         return $amount;
     }
 
-    public function format($model, $key, $when = null, $roundUp = false)
+    public function format($model, $key, $when = null, $roundUp = false, $fallbackCurrencyId = null)
     {
         $model = (object) $model;
         $amount = floatval($model->$key) ?? 0;
@@ -144,10 +147,10 @@ class Currency
                 return ModelsCurrency::find($currency);
             });
 
-            return $currencyModel->convert($amount, $this->current(), true, $when, $roundUp);
+            return $currencyModel->convert($amount, $this->current($fallbackCurrencyId), true, $when, $roundUp);
         }
 
-        return $this->current()->format($amount);
+        return $this->current($fallbackCurrencyId)->format($amount);
     }
 
     public function updateRates($date = null)

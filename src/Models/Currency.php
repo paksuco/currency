@@ -60,11 +60,7 @@ class Currency extends Model
             }
         }
 
-        $value = $to->from($value, $this, $when);
-
-        if ($roundUp) {
-            $value = ceil($value);
-        }
+        $value = $to->from($value, $this, $when, $roundUp);
 
         if (!$format) {
             return $value;
@@ -99,6 +95,10 @@ class Currency extends Model
         $round2 = round($round, 4);
         if ($round > $round2) {
             $round2 += 1 / pow(10, 4);
+        }
+
+        if ($roundUp) {
+            $round2 = ceil($round2 * 100) / 100;
         }
 
         return $round2;
