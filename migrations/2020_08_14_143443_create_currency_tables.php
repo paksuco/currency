@@ -30,7 +30,7 @@ class CreateCurrencyTables extends Migration
             $table->string("symbol", 12);
             $table->integer("decimals");
             $table->boolean("active")->default(false);
-            $table->decimal("rate", 12, 4, true)->default(1);
+            $table->decimal("rate", 12, 6, true)->default(1);
             $table->timestamps();
         });
 
@@ -38,7 +38,7 @@ class CreateCurrencyTables extends Migration
             $table->bigIncrements('id');
             $table->string("currency_code");
             $table->string("base_currency");
-            $table->decimal("rate", 12, 4, true)->default(1);
+            $table->decimal("rate", 12, 6, true)->default(1);
             $table->datetime("currency_at");
             $table->timestamps();
         });
