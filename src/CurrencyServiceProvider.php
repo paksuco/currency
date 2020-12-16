@@ -3,10 +3,11 @@
 namespace Paksuco\Currency;
 
 use Illuminate\Console\Scheduling\Schedule;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use Livewire\Livewire;
-use Paksuco\Currency\Facades\Currency;
 use Paksuco\Settings\Facades\Settings;
 
 class CurrencyServiceProvider extends ServiceProvider
@@ -36,10 +37,10 @@ class CurrencyServiceProvider extends ServiceProvider
                 if ($container->hasItem("Currencies") == false) {
                     $container->addItem(
                         "Currencies",
-                        route("paksuco.currencies.admin"),
+                        Route::get("paksuco.currencies.admin"),
                         "fas fa-coins",
                         null,
-                        config("currencies.menu_priority", 30)
+                        Config::get("currencies.menu_priority", 30)
                     );
                 }
             }
@@ -54,7 +55,7 @@ class CurrencyServiceProvider extends ServiceProvider
         $this->app->booted(function () {
             if (Settings::get("fixer_api_key", "") != "") {
                 /** @var \Illuminate\Console\Scheduling\Schedule */
-                $schedule = app(Schedule::class);
+                $schedule = $this->app->make(Schedule::class);
                 $schedule
                     ->command('currency:update')
                     ->everyTwoHours()
