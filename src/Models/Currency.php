@@ -71,11 +71,16 @@ class Currency extends Model
 
     public function from($value, Currency $currency, $when = null, $roundUp = false)
     {
+        if ($currency->id === $this->id) {
+            return $value;
+        }
+
         if ($when == null) {
             $rate = $currency->rate;
         } else {
-            $thatday = DB::select("select max(currency_at) as thatday from currency_history where currency_at < :when", [
+            $thatday = DB::select("select max(currency_at) as thatday from currency_history where currency_at < :when and currency_at >= :day", [
                 "when" => $when,
+                "day" => $when->startOfDay(),
             ])[0]->thatday;
 
             if ($thatday != null) {
@@ -83,8 +88,9 @@ class Currency extends Model
                     ->where("currency_at", "=", $thatday)->first()->rate;
             } else {
                 FacadesCurrency::updateRates($when->format("Y-m-d"));
-                $thatday = DB::select("select max(currency_at) as thatday from currency_history where currency_at < :when", [
+                $thatday = DB::select("select max(currency_at) as thatday from currency_history where currency_at < :when and currency_at >= :day", [
                     "when" => $when,
+                    "day" => $when->startOfDay(),
                 ])[0]->thatday;
                 $rate = CurrencyHistory::where("currency_code", "=", $currency->currency_code)
                     ->where("currency_at", "=", $thatday)->first()->rate;
