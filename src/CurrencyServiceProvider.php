@@ -37,7 +37,7 @@ class CurrencyServiceProvider extends ServiceProvider
                 if ($container->hasItem("Currencies") == false) {
                     $container->addItem(
                         "Currencies",
-                        Route::get("paksuco.currencies.admin"),
+                        route("paksuco.currencies.admin"),
                         "fas fa-coins",
                         null,
                         Config::get("currencies.menu_priority", 30)
