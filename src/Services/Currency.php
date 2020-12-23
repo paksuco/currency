@@ -4,7 +4,7 @@ namespace Paksuco\Currency\Services;
 
 use Carbon\Carbon;
 use DateInterval;
-use Facebook\WebDriver\Exception\SessionNotCreatedException;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
@@ -199,6 +199,8 @@ class Currency
                     }
                 }
             }
+        } else {
+            throw new Exception("Rates couldn't be fetched:" . $json);
         }
 
         return 0;
