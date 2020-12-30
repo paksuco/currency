@@ -5,6 +5,7 @@ namespace Paksuco\Currency\Services;
 use Carbon\Carbon;
 use DateInterval;
 use Exception;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
@@ -24,11 +25,16 @@ class Currency
     public function __construct(Request $request)
     {
         $this->currencies = Cache::remember('system_currencies', new DateInterval("PT1H"), function () {
+            /** @var Collection $currencies */
+            $currencies = ModelsCurrency::active()->get();
             $default = Config::get("currencies.default", "USD");
-            ModelsCurrency::where("currency_code", "=", $default)->update([
-                "active" => true,
-            ]);
-            return ModelsCurrency::active()->get();
+            if ($currencies->where("currency_code", $default)->count() == 0) {
+                ModelsCurrency::where("currency_code", "=", $default)->update([
+                    "active" => true,
+                ]);
+                $currencies = ModelsCurrency::active()->get();
+            }
+            return $currencies;
         });
         $this->request = $request;
     }
@@ -65,18 +71,17 @@ class Currency
         }
     }
 
-    public function get($key): ModelsCurrency
+    public function get($key)
     {
-        if (!$key) {
-            return null;
-        }
-
-        return $this->currencies->where("currency_code", $key)->first() ?? null;
+        return $key
+        ? $this->currencies->where("currency_code", "=", $key)->first()
+        : null;
     }
 
     public function getCode($id)
     {
-        return $this->find($id)->currency_code;
+        $currency = $this->find($id);
+        return $currency ? $currency->currency_code : null;
     }
 
     public function set($key)
@@ -100,12 +105,18 @@ class Currency
         return $this->currencies;
     }
 
-    public function find($id): ModelsCurrency
+    /**
+     * @return  ModelsCurrency|null
+     */
+    public function find($id)
     {
         return $this->currencies->find($id);
     }
 
-    public function getDefault(): ModelsCurrency
+    /**
+     * @return  ModelsCurrency|null
+     */
+    public function getDefault()
     {
         $default = Config::get("currencies.default", "USD");
         return $this->get($default);
