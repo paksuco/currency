@@ -99,9 +99,9 @@ class Currency extends Model
 
         $round = ($value / $rate) * $this->rate;
         $round2 = round($round, 4);
-        if ($round > $round2) {
+        /*if ($round > $round2) {
             $round2 += 1 / pow(10, 4);
-        }
+        }*/
 
         if ($roundUp) {
             $round2 = ceil($round2 * 100) / 100;
