@@ -158,18 +158,51 @@ class Currency
                 return ModelsCurrency::find($currency);
             });
 
-            return $currencyModel->convert($amount, $this->current($fallbackCurrencyId), true, $when, $roundUp);
+            return $currencyModel->convert($amount, $this->current($fallbackCurrencyId), true, null, $when, $roundUp);
         }
 
         return $this->current($fallbackCurrencyId)->format($amount);
+    }
+
+    public function getRateFor(ModelsCurrency $currency, Carbon $date)
+    {
+        $dates = CurrencyHistory::where("currency_at", "<", $date->clone()->addDay())
+            ->where("currency_code", "=", $currency->currency_code)
+            ->where("currency_at", ">", $date->clone()->subDay())
+            ->get();
+
+        if (count($dates)) {
+            $min = INF;
+            $lowest = null;
+            foreach ($dates as $dbDate) {
+                $curmin = $date->diffInMinutes($dbDate->currency_at);
+                if ($curmin < $min) {
+                    $lowest = $dbDate;
+                    $min = $curmin;
+                }
+            }
+            return $lowest;
+        }
+
+        $this->updateRates($date->toDateString());
+        return $this->getRateFor($currency, $date);
     }
 
     public function updateRates($date = null)
     {
         // set API Endpoint and API key
         $endpoint = 'latest';
+        $givenDate = false;
+
         if ($date) {
-            $endpoint = $date;
+            $givenDate = Carbon::createFromFormat("Y-m-d", $date);
+            if ($givenDate->isValid()) {
+                if (now()->isSameDay($givenDate) == false) {
+                    $endpoint = $date;
+                }
+            } else {
+                return 0;
+            }
         }
 
         $access_key = Settings::get('fixer_api_key', "");
@@ -191,6 +224,9 @@ class Currency
 
         if ($exchangeRates && $exchangeRates["success"]) {
             $currencies = $exchangeRates["rates"];
+            $timestamp = Carbon::createFromTimestamp($exchangeRates["timestamp"]);
+            // logger()->debug("received timestamp" . $timestamp->clone()->toDateTimeLocalString());
+            // logger()->debug("saving timestamp" . $timestamp->clone()->startOfHour()->toDateTimeLocalString());
             foreach ($currencies as $key => $value) {
                 $currency = ModelsCurrency::where("currency_code", "=", $key)->first();
                 if ($currency instanceof ModelsCurrency) {
@@ -203,9 +239,7 @@ class Currency
                             "base_currency" => $exchangeRates["base"],
                             "currency_code" => $key,
                             "rate" => $value,
-                            "currency_at" => $date ?
-                            Carbon::createFromFormat("Y-m-d", $date)->startOfDay() :
-                            Carbon::createFromTimestamp($exchangeRates["timestamp"]),
+                            "currency_at" => $timestamp->startOfHour(),
                         ]);
                     }
                 }

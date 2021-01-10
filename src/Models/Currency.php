@@ -4,8 +4,7 @@ namespace Paksuco\Currency\Models;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\DB;
-use Paksuco\Currency\Facades\Currency as FacadesCurrency;
+use Paksuco\Currency\Facades\Currency as CurrencyService;
 
 class Currency extends Model
 {
@@ -77,30 +76,16 @@ class Currency extends Model
 
         if ($when == null) {
             $rate = $currency->rate;
+            $thisRate = $this->rate;
         } else {
-            $thatday = DB::select("select max(currency_at) as thatday from currency_history where currency_at < :when and currency_at >= :day", [
-                "when" => $when,
-                "day" => $when->format("Y-m-d"),
-            ])[0]->thatday;
-
-            if ($thatday != null) {
-                $rate = CurrencyHistory::where("currency_code", "=", $currency->currency_code)
-                    ->where("currency_at", "=", $thatday)->first()->rate;
-            } else {
-                FacadesCurrency::updateRates($when->format("Y-m-d"));
-                $thatday = DB::select("select max(currency_at) as thatday from currency_history where currency_at < :when and currency_at >= :day", [
-                    "when" => $when,
-                    "day" => $when->format("Y-m-d")
-                ])[0]->thatday;
-                $rate = CurrencyHistory::where("currency_code", "=", $currency->currency_code)
-                    ->where("currency_at", "=", $thatday)->first()->rate;
-            }
+            $rate = CurrencyService::getRateFor($currency, $when)->rate;
+            $thisRate = CurrencyService::getRateFor($this, $when)->rate;
         }
 
-        $round = ($value / $rate) * $this->rate;
+        $round = ($value / $rate) * $thisRate;
         $round2 = round($round, 4);
         /*if ($round > $round2) {
-            $round2 += 1 / pow(10, 4);
+        $round2 += 1 / pow(10, 4);
         }*/
 
         if ($roundUp) {
