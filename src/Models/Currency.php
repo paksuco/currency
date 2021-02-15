@@ -22,7 +22,8 @@ class Currency extends Model
             $space = false;
         }
 
-        $output = "<div class='inline-block'>";
+        // $output = "<div class='inline-block'>";
+        $output = "";
 
         if ($direction == "L") {
             $output .= $symbol;
@@ -40,7 +41,7 @@ class Currency extends Model
             $output .= $symbol;
         }
 
-        $output .= "</div>";
+        //$output .= "</div>";
 
         return trim($output);
     }
