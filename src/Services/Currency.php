@@ -54,6 +54,9 @@ class Currency
         return false;
     }
 
+    /**
+     * @return ModelsCurrency
+     */
     public function current($fallbackCurrencyId = null)
     {
         try {
@@ -127,7 +130,7 @@ class Currency
         return Config::get("currencies.method", "session");
     }
 
-    public function toCurrent($model, $key, $when = null, $roundUp = false, $fallbackCurrencyId = null)
+    public function toCurrent($model, $key, $when = null, $fallbackCurrencyId = null)
     {
         $model = (object) $model;
         $amount = floatval($model->$key) ?? 0;
@@ -140,13 +143,13 @@ class Currency
                 return ModelsCurrency::find($currency);
             });
 
-            return $currencyModel->convert($amount, $this->current($fallbackCurrencyId), false, $when, $roundUp);
+            return $currencyModel->convert($amount, $this->current($fallbackCurrencyId), false, $when);
         }
 
         return $amount;
     }
 
-    public function format($model, $key, $when = null, $roundUp = false, $fallbackCurrencyId = null)
+    public function format($model, $key, $when = null, $fallbackCurrencyId = null)
     {
         $model = (object) $model;
         $amount = floatval($model->$key) ?? 0;
@@ -158,7 +161,7 @@ class Currency
                 return ModelsCurrency::find($currency);
             });
 
-            return $currencyModel->convert($amount, $this->current($fallbackCurrencyId), true, null, $when, $roundUp);
+            return $currencyModel->convert($amount, $this->current($fallbackCurrencyId), true, null, $when);
         }
 
         return $this->current($fallbackCurrencyId)->format($amount);

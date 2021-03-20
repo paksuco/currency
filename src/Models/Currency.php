@@ -2,6 +2,7 @@
 
 namespace Paksuco\Currency\Models;
 
+use Exception;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Paksuco\Currency\Facades\Currency as CurrencyService;
@@ -51,7 +52,7 @@ class Currency extends Model
         return $query->where("active", "=", true);
     }
 
-    public function convert($value, $to, $format = false, $override_decimalNumber = null, $when = null, $roundUp = false)
+    public function convert($value, $to, $format = false, $override_decimalNumber = null, $when = null)
     {
         if (!($to instanceof Currency)) {
             $to = Currency::where(['currency_code' => $to])->first();
@@ -60,7 +61,7 @@ class Currency extends Model
             }
         }
 
-        $value = $to->from($value, $this, $when, $roundUp);
+        $value = $to->from($value, $this, $when);
 
         if (!$format) {
             return $value;
@@ -75,6 +76,8 @@ class Currency extends Model
             return $value;
         }
 
+        if($value < 0.01) return 0;
+
         if ($when == null) {
             $rate = $currency->rate;
             $thisRate = $this->rate;
@@ -83,16 +86,11 @@ class Currency extends Model
             $thisRate = CurrencyService::getRateFor($this, $when)->rate;
         }
 
-        $round = ($value / $rate) * $thisRate;
-        $round2 = round($round, 4);
-        /*if ($round > $round2) {
-        $round2 += 1 / pow(10, 4);
-        }*/
-
-        if ($roundUp) {
-            $round2 = ceil($round2 * 100) / 100;
+        try {
+            return bcmul(bcdiv($value, $rate, 4), $thisRate, 4);
+        } catch (Exception $ex) {
+            logger()->info(["Value: " . $value, "Rate: " . $rate, "Convert Rate" . $thisRate]);
+            throw $ex;
         }
-
-        return $round2;
     }
 }
