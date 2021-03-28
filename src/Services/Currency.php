@@ -62,8 +62,8 @@ class Currency
         try {
             $driver = $this->driver();
             $key = $driver == "session" ?
-            $this->request->session()->get('currency', null) :
-            $this->request->cookie('currency');
+                $this->request->session()->get('currency', null) :
+                $this->request->cookie('currency');
 
             return ($key ? $this->get($key) : null) ?? $this->getDefault();
         } catch (RuntimeException $ex) {
@@ -77,8 +77,8 @@ class Currency
     public function get($key)
     {
         return $key
-        ? $this->currencies->where("currency_code", "=", $key)->first()
-        : null;
+            ? $this->currencies->where("currency_code", "=", $key)->first()
+            : null;
     }
 
     public function getCode($id)
@@ -92,8 +92,8 @@ class Currency
         $driver = $this->driver();
 
         $driver == "session" ?
-        Session::put('currency', $key) :
-        setcookie('currency', $key, time() + (24 * 60 * 60), '/', URL::to('/'));
+            Session::put('currency', $key) :
+            setcookie('currency', $key, time() + (24 * 60 * 60), '/', URL::to('/'));
 
         if (Auth::check() && Config::get("currencies.users_have_currencies", false) === true) {
             /** @var App\User */
@@ -187,8 +187,11 @@ class Currency
             return $lowest;
         }
 
-        $this->updateRates($date->toDateString());
-        return $this->getRateFor($currency, $date);
+        if ($this->updateRates($date->toDateString())) {
+            return $this->getRateFor($currency, $date);
+        }
+
+        throw new Exception("Cant refresh currencies!");
     }
 
     public function updateRates($date = null)
@@ -204,6 +207,7 @@ class Currency
                     $endpoint = $date;
                 }
             } else {
+                logger()->alert("Date is not valid", [$givenDate]);
                 return 0;
             }
         }
@@ -211,6 +215,7 @@ class Currency
         $access_key = Settings::get('fixer_api_key', "");
 
         if ($access_key == "") {
+            logger()->alert("Fixer Access Key is empty");
             return 0;
         }
 
@@ -238,19 +243,23 @@ class Currency
                         $currency->save();
                     }
                     if ($currency->active) {
-                        CurrencyHistory::create([
-                            "base_currency" => $exchangeRates["base"],
-                            "currency_code" => $key,
-                            "rate" => $value,
-                            "currency_at" => $timestamp->startOfHour(),
-                        ]);
+                        CurrencyHistory::create(
+                            [
+                                "base_currency" => $exchangeRates["base"],
+                                "currency_code" => $key,
+                                "rate" => $value,
+                                "currency_at" => $timestamp->startOfHour(),
+                            ]
+                        );
                     }
                 }
             }
+            return 1;
         } else {
             throw new Exception("Rates couldn't be fetched:" . $json);
         }
 
+        logger()->alert("Shouldn't reach here!");
         return 0;
     }
 }
