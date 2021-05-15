@@ -24,7 +24,7 @@ class Currency
 
     public function __construct(Request $request)
     {
-        $this->currencies = Cache::remember('system_currencies', new DateInterval("PT1H"), function () {
+        $this->currencies = Cache::remember('system_currencies', new DateInterval("PT5M"), function () {
             /** @var Collection $currencies */
             $currencies = ModelsCurrency::active()->get();
             $default = Config::get("currencies.default", "USD");

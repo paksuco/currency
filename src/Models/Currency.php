@@ -76,7 +76,9 @@ class Currency extends Model
             return $value;
         }
 
-        if($value < 0.01) return 0;
+        if ($value < 0.01) {
+            return 0;
+        }
 
         if ($when == null) {
             $rate = $currency->rate;
