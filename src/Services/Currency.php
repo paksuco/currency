@@ -2,19 +2,19 @@
 
 namespace Paksuco\Currency\Services;
 
-use Carbon\Carbon;
 use DateInterval;
 use Exception;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\URL;
+use Paksuco\Currency\Contracts\ICurrencyProvider;
 use Paksuco\Currency\Models\Currency as ModelsCurrency;
 use Paksuco\Currency\Models\CurrencyHistory;
-use Paksuco\Settings\Facades\Settings;
 use RuntimeException;
 
 class Currency
@@ -169,97 +169,85 @@ class Currency
 
     public function getRateFor(ModelsCurrency $currency, Carbon $date)
     {
-        $dates = CurrencyHistory::where("currency_at", "<", $date->clone()->addDay())
-            ->where("currency_code", "=", $currency->currency_code)
-            ->where("currency_at", ">", $date->clone()->subDay())
-            ->get();
-
-        if (count($dates)) {
-            $min = INF;
-            $lowest = null;
-            foreach ($dates as $dbDate) {
-                $curmin = $date->diffInMinutes($dbDate->currency_at);
-                if ($curmin < $min) {
-                    $lowest = $dbDate;
-                    $min = $curmin;
-                }
-            }
-            return $lowest;
+        if($date->isSameDay(now())){
+            return $currency->rate;
         }
 
-        if ($this->updateRates($date->toDateString())) {
+        $date = $date->startOfDay();
+
+        /** @var CurrencyHistory $historicalRate */
+        $historicalRate = CurrencyHistory::where("currency_at", "=", $date)
+            ->where("currency_code", "=", $currency->currency_code)
+            ->first();
+
+        if ($historicalRate instanceof CurrencyHistory) {
+            return $historicalRate->rate;
+        }else{
+            $this->updateRates($date);
             return $this->getRateFor($currency, $date);
         }
-
-        throw new Exception("Cant refresh currencies!");
     }
 
-    public function updateRates($date = null)
+    public function updateRates(Carbon $date = null)
     {
-        // set API Endpoint and API key
-        $endpoint = 'latest';
-        $givenDate = false;
-
-        if ($date) {
-            $givenDate = Carbon::createFromFormat("Y-m-d", $date);
-            if ($givenDate->isValid()) {
-                if (now()->isSameDay($givenDate) == false) {
-                    $endpoint = $date;
+        $availableProviders = config("currencies.providers", []);
+        foreach ($availableProviders as $provider) {
+            $providerInstance = new $provider["class"];
+            if ($providerInstance instanceof ICurrencyProvider) {
+                if ($date && $date->isSameDay(Carbon::now()) == false) {
+                    $hasRates = CurrencyHistory::where('currency_at', '=', $date)->count() > 0;
+                    if ($hasRates == false) {
+                        $result = $providerInstance->getHistoricalRates($date);
+                    } else {
+                        break;
+                    }
+                } else {
+                    /** @var Carbon $latest */
+                    $latest = ModelsCurrency::max('updated_at');
+                    if ($latest == null || $latest->diffInMinutes(now(), true) > 30) {
+                        $result = $providerInstance->getLatestRates();
+                    } else {
+                        break;
+                    }
                 }
-            } else {
-                logger()->alert("Date is not valid", [$givenDate]);
-                return 0;
+                if ($result !== false) {
+                    $this->processRates($result, $date);
+                    break;
+                }
             }
         }
+    }
 
-        $access_key = Settings::get('fixer_api_key', "");
-
-        if ($access_key == "") {
-            logger()->alert("Fixer Access Key is empty");
-            return 0;
-        }
-
-        // Initialize CURL:
-        $ch = curl_init('http://data.fixer.io/api/' . $endpoint . '?access_key=' . $access_key . '');
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-
-        // Store the data:
-        $json = curl_exec($ch);
-        curl_close($ch);
-
-        // Decode JSON response:
-        $exchangeRates = json_decode($json, true);
-
-        if ($exchangeRates && $exchangeRates["success"]) {
-            $currencies = $exchangeRates["rates"];
-            $timestamp = Carbon::createFromTimestamp($exchangeRates["timestamp"]);
-            // logger()->debug("received timestamp" . $timestamp->clone()->toDateTimeLocalString());
-            // logger()->debug("saving timestamp" . $timestamp->clone()->startOfHour()->toDateTimeLocalString());
-            foreach ($currencies as $key => $value) {
+    protected function processRates($rates, Carbon $date = null)
+    {
+        if ($date == null || $date->isSameDay(Carbon::now())) {
+            // Fill currency table
+            foreach ($rates as $key => $rate) {
                 $currency = ModelsCurrency::where("currency_code", "=", $key)->first();
                 if ($currency instanceof ModelsCurrency) {
-                    if (!$date) {
-                        $currency->rate = $value;
-                        $currency->save();
-                    }
-                    if ($currency->active) {
-                        CurrencyHistory::create(
-                            [
-                                "base_currency" => $exchangeRates["base"],
-                                "currency_code" => $key,
-                                "rate" => $value,
-                                "currency_at" => $timestamp->startOfHour(),
-                            ]
-                        );
-                    }
+                    $currency->rate = $rate;
+                    $currency->save();
                 }
             }
-            return 1;
         } else {
-            throw new Exception("Rates couldn't be fetched:" . $json);
+            $date = $date->startOfDay();
+            foreach ($rates as $key => $rate) {
+                $currencyHistory = CurrencyHistory::where([
+                    "currency_code" => $key,
+                    "currency_at" => $date
+                ])->first();
+                if ($currencyHistory instanceof CurrencyHistory) {
+                    $currencyHistory->rate = $rate;
+                    $currencyHistory->save();
+                }else{
+                    $currencyHistory = new CurrencyHistory();
+                    $currencyHistory->base_currency = "TRY";
+                    $currencyHistory->currency_at = $date;
+                    $currencyHistory->currency_code = $key;
+                    $currencyHistory->rate = $rate;
+                    $currencyHistory->save();
+                }
+            }
         }
-
-        logger()->alert("Shouldn't reach here!");
-        return 0;
     }
 }

@@ -52,12 +52,25 @@ return [
     'currency_column' => 'currency_id',
 
     /**
-     * Fixer IO API Key to retrieve currencies
-     */
-    'fixer_api_key' => env("FIXER_API_KEY", ""),
-
-    /**
      * If you're using Paksuco/Menu, you can set the priority here
      */
-    'menu_priority' => 30
+    'menu_priority' => 30,
+
+    /**
+     * Enabled providers list
+     */
+    'providers' => [
+        'fixerio' => [
+            'class' => \Paksuco\Currency\Providers\FixerIoProvider::class,
+            'credentials' => [
+                'api_key' => env("FIXER_API_KEY", ""),
+            ],
+        ],
+        'openexchangerates' => [
+            'class' => \Paksuco\Currency\Providers\OpenExchangeRatesProvider::class,
+            'credentials' => [
+                'api_key' => env("OPEN_EXCHANGE_RATES_API_KEY", ""),
+            ],
+        ],
+    ],
 ];
