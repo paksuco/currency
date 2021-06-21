@@ -8,6 +8,7 @@ use Paksuco\Currency\Contracts\ICurrencyProvider;
 class FixerIoProvider implements ICurrencyProvider
 {
     protected $key        = "fixerio";
+    protected $base       = "EUR";
 
     public function getApiKey()
     {
@@ -70,6 +71,10 @@ class FixerIoProvider implements ICurrencyProvider
             logger()->alert("Fixer IO Error: " . json_encode($exchangeRates));
             return false;
         }
+    }
+
+    private function fixRates($response){
+
     }
 
     private function fetchRemoteJson($url)

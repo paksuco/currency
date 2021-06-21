@@ -8,6 +8,7 @@ use Paksuco\Currency\Contracts\ICurrencyProvider;
 class OpenExchangeRatesProvider implements ICurrencyProvider
 {
     protected $key        = "openexchangerates";
+    protected $base       = "USD";
 
     public function getApiKey()
     {
@@ -34,7 +35,7 @@ class OpenExchangeRatesProvider implements ICurrencyProvider
         $exchangeRates    = $this->fetchRemoteJson($url);
 
         if ($exchangeRates && $this->hasError($exchangeRates) == false) {
-            return $exchangeRates["rates"];
+            return $this->fixRates($exchangeRates);
         } else {
             logger()->alert("OpenExchRates Error: " . json_encode($exchangeRates));
             return false;
@@ -65,11 +66,18 @@ class OpenExchangeRatesProvider implements ICurrencyProvider
         $exchangeRates    = $this->fetchRemoteJson($url);
 
         if ($exchangeRates && $this->hasError($exchangeRates) == false) {
-            return $exchangeRates["rates"];
+            return $this->fixRates($exchangeRates);
         } else {
             logger()->alert("OpenExchRates Error: " . json_encode($exchangeRates));
             return false;
         }
+    }
+
+    private function fixRates($response)
+    {
+        if($response["base"] === "USD") return $response["rates"];
+        //$baseRate = $response["rates"][resp]
+        return $response["rates"];
     }
 
     private function hasError($response)

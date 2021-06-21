@@ -204,6 +204,7 @@ class Currency
                 } else {
                     /** @var Carbon $latest */
                     $latest = ModelsCurrency::max('updated_at');
+                    $latest = $latest ? Carbon::parse($latest) : null;
                     if ($latest == null || $latest->diffInMinutes(now(), true) > 30) {
                         $result = $providerInstance->getLatestRates();
                     } else {
@@ -225,6 +226,7 @@ class Currency
             foreach ($rates as $key => $rate) {
                 $currency = ModelsCurrency::where("currency_code", "=", $key)->first();
                 if ($currency instanceof ModelsCurrency) {
+                    $currency->updated_at = now();
                     $currency->rate = $rate;
                     $currency->save();
                 }
