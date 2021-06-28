@@ -8,7 +8,6 @@ use Paksuco\Currency\Contracts\ICurrencyProvider;
 class OpenExchangeRatesProvider implements ICurrencyProvider
 {
     protected $key        = "openexchangerates";
-    protected $base       = "USD";
 
     public function getApiKey()
     {
@@ -35,7 +34,7 @@ class OpenExchangeRatesProvider implements ICurrencyProvider
         $exchangeRates    = $this->fetchRemoteJson($url);
 
         if ($exchangeRates && $this->hasError($exchangeRates) == false) {
-            return $this->fixRates($exchangeRates);
+            return $this->fixRates($exchangeRates, config('currencies.base_currency'));
         } else {
             logger()->alert("OpenExchRates Error: " . json_encode($exchangeRates));
             return false;
@@ -66,18 +65,21 @@ class OpenExchangeRatesProvider implements ICurrencyProvider
         $exchangeRates    = $this->fetchRemoteJson($url);
 
         if ($exchangeRates && $this->hasError($exchangeRates) == false) {
-            return $this->fixRates($exchangeRates);
+            return $this->fixRates($exchangeRates, config('currencies.base_currency'));
         } else {
             logger()->alert("OpenExchRates Error: " . json_encode($exchangeRates));
             return false;
         }
     }
 
-    private function fixRates($response)
+    public function fixRates($rates, $base)
     {
-        if($response["base"] === "USD") return $response["rates"];
-        //$baseRate = $response["rates"][resp]
-        return $response["rates"];
+        if ($rates['base'] == $base) return $rates['rates'];
+        $base_rate = $rates['rates'][$base];
+        foreach ($rates['rates'] as $key => $rate) {
+            $rates['rates'][$key] = $rate / $base_rate;
+        }
+        return $rates['rate'];
     }
 
     private function hasError($response)

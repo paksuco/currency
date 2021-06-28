@@ -8,7 +8,6 @@ use Paksuco\Currency\Contracts\ICurrencyProvider;
 class FixerIoProvider implements ICurrencyProvider
 {
     protected $key        = "fixerio";
-    protected $base       = "EUR";
 
     public function getApiKey()
     {
@@ -35,7 +34,7 @@ class FixerIoProvider implements ICurrencyProvider
         $exchangeRates    = $this->fetchRemoteJson($url);
 
         if ($exchangeRates && $exchangeRates["success"]) {
-            return $exchangeRates["rates"];
+            return $this->fixRates($exchangeRates, config('currencies.base_currency'));
         } else {
             logger()->alert("Fixer IO Error: " . json_encode($exchangeRates));
             return false;
@@ -66,15 +65,21 @@ class FixerIoProvider implements ICurrencyProvider
         $exchangeRates    = $this->fetchRemoteJson($url);
 
         if ($exchangeRates && $exchangeRates["success"]) {
-            return $exchangeRates["rates"];
+            return $this->fixRates($exchangeRates, config('currencies.base_currency'));
         } else {
             logger()->alert("Fixer IO Error: " . json_encode($exchangeRates));
             return false;
         }
     }
 
-    private function fixRates($response){
-
+    public function fixRates($rates, $base)
+    {
+        if ($rates['base'] == $base) return $rates['rates'];
+        $base_rate = $rates['rates'][$base];
+        foreach ($rates['rates'] as $key => $rate) {
+            $rates['rates'][$key] = $rate / $base_rate;
+        }
+        return $rates['rate'];
     }
 
     private function fetchRemoteJson($url)

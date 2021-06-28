@@ -27,6 +27,11 @@ return [
     'default' => 'USD',
 
     /**
+     * Base currency for saving rates to database
+     */
+    'base_currency' => 'USD',
+
+    /**
      * Use client country when there's no currency set?
      */
     'use_client' => false,
