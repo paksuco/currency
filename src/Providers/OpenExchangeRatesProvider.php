@@ -79,7 +79,7 @@ class OpenExchangeRatesProvider implements ICurrencyProvider
         foreach ($rates['rates'] as $key => $rate) {
             $rates['rates'][$key] = $rate / $base_rate;
         }
-        return $rates['rate'];
+        return $rates['rates'];
     }
 
     private function hasError($response)

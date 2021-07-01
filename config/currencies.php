@@ -77,5 +77,11 @@ return [
                 'api_key' => env("OPEN_EXCHANGE_RATES_API_KEY", ""),
             ],
         ],
+        'currencylayer' => [
+            'class' => \Paksuco\Currency\Providers\CurrencyLayerProvider::class,
+            'credentials' => [
+                'api_key' => env("CURRENCY_LAYER_API_KEY", ""),
+            ],
+        ]
     ],
 ];

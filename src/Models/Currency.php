@@ -6,6 +6,7 @@ use Exception;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Paksuco\Currency\Facades\Currency as CurrencyService;
+use Paksuco\Currency\Services\Currency as ServicesCurrency;
 
 class Currency extends Model
 {
@@ -80,13 +81,20 @@ class Currency extends Model
             return 0;
         }
 
-        if ($when == null) {
-            $rate = $currency->rate;
-            $thisRate = $this->rate;
-        } else {
-            $rate = CurrencyService::getRateFor($currency, $when)->rate;
-            $thisRate = CurrencyService::getRateFor($this, $when)->rate;
+        if ($when == null) $when = now();
+
+        $oldRate = $currency->rate;
+        $rate = CurrencyService::getRateFor($currency, $when);
+        if ($oldRate != $rate) {
+            $this->refresh();
         }
+        $thisRate = CurrencyService::getRateFor($this, $when);
+
+        /*logger("Rates for conversion", [
+            "amount" => $value,
+            $currency->currency_code => $rate,
+            $this->currency_code => $thisRate
+        ]);*/
 
         try {
             return bcmul(bcdiv($value, $rate, 4), $thisRate, 4);

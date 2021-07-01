@@ -169,7 +169,14 @@ class Currency
 
     public function getRateFor(ModelsCurrency $currency, Carbon $date)
     {
-        if($date->isSameDay(now())){
+        if ($date->isSameDay(now())) {
+            if (
+                $currency->currency_code != config('currencies.base_currency')
+                && $currency->rate == 1
+            ) {
+                $this->updateRates();
+                $currency->refresh();
+            }
             return $currency->rate;
         }
 
@@ -182,7 +189,7 @@ class Currency
 
         if ($historicalRate instanceof CurrencyHistory) {
             return $historicalRate->rate;
-        }else{
+        } else {
             $this->updateRates($date);
             return $this->getRateFor($currency, $date);
         }
@@ -190,6 +197,7 @@ class Currency
 
     public function updateRates(Carbon $date = null)
     {
+        $result = false;
         $availableProviders = config("currencies.providers", []);
         foreach ($availableProviders as $provider) {
             $providerInstance = new $provider["class"];
@@ -205,7 +213,11 @@ class Currency
                     /** @var Carbon $latest */
                     $latest = ModelsCurrency::max('updated_at');
                     $latest = $latest ? Carbon::parse($latest) : null;
-                    if ($latest == null || $latest->diffInMinutes(now(), true) > 30) {
+                    if (
+                        $latest == null
+                        || $latest->diffInMinutes(now(), true) > 30
+                        || ModelsCurrency::where('rate', '=', 1)->count() > 5
+                    ) {
                         $result = $providerInstance->getLatestRates();
                     } else {
                         break;
@@ -224,7 +236,7 @@ class Currency
         if ($date == null || $date->isSameDay(Carbon::now())) {
             // Fill currency table
             foreach ($rates as $key => $rate) {
-                $currency = ModelsCurrency::where("currency_code", "=", $key)->first();
+                $currency = ModelsCurrency::withoutGlobalScopes()->where("currency_code", "=", $key)->first();
                 if ($currency instanceof ModelsCurrency) {
                     $currency->updated_at = now();
                     $currency->rate = $rate;
@@ -234,14 +246,14 @@ class Currency
         } else {
             $date = $date->startOfDay();
             foreach ($rates as $key => $rate) {
-                $currencyHistory = CurrencyHistory::where([
+                $currencyHistory = CurrencyHistory::withoutGlobalScopes()->where([
                     "currency_code" => $key,
                     "currency_at" => $date
                 ])->first();
                 if ($currencyHistory instanceof CurrencyHistory) {
                     $currencyHistory->rate = $rate;
                     $currencyHistory->save();
-                }else{
+                } else {
                     $currencyHistory = new CurrencyHistory();
                     $currencyHistory->base_currency = "TRY";
                     $currencyHistory->currency_at = $date;
