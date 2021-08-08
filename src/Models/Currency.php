@@ -81,7 +81,9 @@ class Currency extends Model
             return 0;
         }
 
-        if ($when == null) $when = now();
+        if ($when == null) {
+            $when = now();
+        }
 
         $oldRate = $currency->rate;
         $rate = CurrencyService::getRateFor($currency, $when);

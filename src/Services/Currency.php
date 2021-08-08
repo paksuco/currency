@@ -139,9 +139,13 @@ class Currency
 
         if ($amount && $currency) {
             /** @var ModelsCurrency */
-            $currencyModel = Cache::remember("currency_model_$currency", new \DateInterval("PT1H"), function () use ($currency) {
-                return ModelsCurrency::find($currency);
-            });
+            $currencyModel = Cache::remember(
+                "currency_model_$currency",
+                new \DateInterval("PT1H"),
+                function () use ($currency) {
+                    return ModelsCurrency::find($currency);
+                }
+            );
 
             return $currencyModel->convert($amount, $this->current($fallbackCurrencyId), false, $when);
         }
@@ -157,9 +161,13 @@ class Currency
 
         if ($amount && $currency) {
             /** @var ModelsCurrency */
-            $currencyModel = Cache::remember("currency_model_$currency", new \DateInterval("PT1H"), function () use ($currency) {
-                return ModelsCurrency::find($currency);
-            });
+            $currencyModel = Cache::remember(
+                "currency_model_$currency",
+                new \DateInterval("PT1H"),
+                function () use ($currency) {
+                    return ModelsCurrency::find($currency);
+                }
+            );
 
             return $currencyModel->convert($amount, $this->current($fallbackCurrencyId), true, null, $when);
         }
@@ -170,8 +178,7 @@ class Currency
     public function getRateFor(ModelsCurrency $currency, Carbon $date)
     {
         if ($date->isSameDay(now())) {
-            if (
-                $currency->currency_code != config('currencies.base_currency')
+            if ($currency->currency_code != config('currencies.base_currency')
                 && $currency->rate == 1
             ) {
                 $this->updateRates();
@@ -213,8 +220,7 @@ class Currency
                     /** @var Carbon $latest */
                     $latest = ModelsCurrency::max('updated_at');
                     $latest = $latest ? Carbon::parse($latest) : null;
-                    if (
-                        $latest == null
+                    if ($latest == null
                         || $latest->diffInMinutes(now(), true) > 30
                         || ModelsCurrency::where('rate', '=', 1)->count() > 5
                     ) {
